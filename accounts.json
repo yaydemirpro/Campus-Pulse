@@ -1,0 +1,142 @@
+{
+  "admin@gmail.com": {
+    "name": "Admin",
+    "surname": "Administrator",
+    "password": "Admin123",
+    "Account_Type": "Admin",
+    "Email": "admin@gmail.com"
+  },
+  "serkanbakisgan@gmail.com": {
+    "name": "Serkan",
+    "surname": "Bakisgan",
+    "password": "12345",
+    "Account_Type": "Student",
+    "Email": "serkanbakisgan@gmail.com"
+  },
+  "hakanbakisgan@gmail.com": {
+    "name": "Hakan",
+    "surname": "Bakisgan",
+    "password": "12345",
+    "Account_Type": "Student",
+    "Email": "hakanbakisgan@gmail.com"
+  },
+  "mervebakisgan@gmail.com": {
+    "name": "Merve",
+    "surname": "Bakisgan",
+    "password": "12345",
+    "Account_Type": "Teacher",
+    "Email": "mervebakisgan@gmail.com"
+  },
+  "incibakisgan@gmail.com": {
+    "password": "AbCn12**",
+    "Account_Type": "Student",
+    "name": "",
+    "surname": "",
+    "Email": "incibakisgan@gmail.com"
+  },
+  "serdarbakisgan@gmail.com": {
+    "password": "AbCn12**",
+    "Account_Type": "Student",
+    "name": "Serdar",
+    "surname": "Bakisgan",
+    "Email": "serdarbakisgan@gmail.com"
+  },
+  "merveyilmaz@gmail.com": {
+    "password": "12345",
+    "Account_Type": "Teacher",
+    "name": "Merve",
+    "surname": "Yilmaz",
+    "Email": "merveyilmaz@gmail.com"
+  },
+  "user8@gmail.com": {
+    "password": "P@ssw0rd",
+    "Account_Type": "Student",
+    "name": "User",
+    "surname": "Eight",
+    "Email": "user8@gmail.com"
+  },
+  "user9@gmail.com": {
+    "password": "Secret789",
+    "Account_Type": "Student",
+    "name": "User",
+    "surname": "Nine",
+    "Email": "user9@gmail.com"
+  },
+  "user10@gmail.com": {
+    "password": "SecurePwd",
+    "Account_Type": "Teacher",
+    "name": "User",
+    "surname": "Ten",
+    "Email": "user10@gmail.com"
+  },
+  "user11@gmail.com": {
+    "password": "Pass1234",
+    "Account_Type": "Admin",
+    "name": "User",
+    "surname": "Eleven",
+    "Email": "user11@gmail.com"
+  },
+  "user12@gmail.com": {
+    "password": "SecurePass",
+    "Account_Type": "Student",
+    "name": "User",
+    "surname": "Twelve",
+    "Email": "user12@gmail.com"
+  },
+  "user13@gmail.com": {
+    "password": "123456",
+    "Account_Type": "Teacher",
+    "name": "User",
+    "surname": "Thirteen",
+    "Email": "user13@gmail.com"
+  },
+  "user14@gmail.com": {
+    "password": "AbCdEf12",
+    "Account_Type": "Admin",
+    "name": "User",
+    "surname": "Fourteen",
+    "Email": "user14@gmail.com"
+  },
+  "user15@gmail.com": {
+    "password": "Password15",
+    "Account_Type": "Student",
+    "name": "User",
+    "surname": "Fifteen",
+    "Email": "user15@gmail.com"
+  },
+  "user16@gmail.com": {
+    "password": "Secure123",
+    "Account_Type": "Teacher",
+    "name": "User",
+    "surname": "Sixteen",
+    "Email": "user16@gmail.com"
+  },
+  "user17@gmail.com": {
+    "password": "UserPass17",
+    "Account_Type": "Admin",
+    "name": "User",
+    "surname": "Seventeen",
+    "Email": "user17@gmail.com"
+  },
+  "user18@gmail.com": {
+    "password": "Pass123",
+    "Account_Type": "Student",
+    "name": "User",
+    "surname": "Eighteen",
+    "Email": "user18@gmail.com"
+  },
+  "user19@gmail.com": {
+    "password": "SecretPwd19",
+    "Account_Type": "Teacher",
+    "name": "User",
+    "surname": "Nineteen",
+    "Email": "user19@gmail.com"
+  },
+  "user20@gmail.com": {
+    "password": "Pwd2020",
+    "Account_Type": "Admin",
+    "name": "User",
+    "surname": "Twenty",
+    "Email": "user20@gmail.com"
+  }
+}

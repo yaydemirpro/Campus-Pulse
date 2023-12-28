@@ -1,12 +1,11 @@
 **Campus-Pulse (School Application)**
  
 **First Step (Diagrams)**
-    You'll prepare a “Use Case Diagram” and a  “Class Diagram” of the project and their brief  descriptions will be in the ReadMe file of the GitHub repo.
+    
+    < Prepare a “Use Case Diagram” and a  “Class Diagram” of the project and their brief  descriptions will be in the ReadMe file of the GitHub repo.>
 
 
 **Second Step (Impl.)**
-    Prepare a ‘Use Case Diagram’
-    Prepare a ‘Class Diagram’
 
     < Class:
        ○ Multiple classes can be used in the project >
@@ -30,8 +29,6 @@
        ○ When the admin login, admin will reach the admin page
        ○ Admin can run all the functions (opt.)
        ○ Admin will create a teacher account with the given email addresses >
-
-**Second Step (Implementation): **
 
     Student Page
        ○ When the students login, they will reach the Student Page

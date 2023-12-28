@@ -1,0 +1,302 @@
+{
+  "admin@gmail.com": {
+    "tasks": [
+      {
+        "id": 1,
+        "task": "Ensure proper management of user accounts in the system",
+        "status": true,
+        "deadline": "2023-12-31"
+      },
+      {
+        "id": 2,
+        "task": "Conduct a review of the system's security measures",
+        "status": false,
+        "deadline": "2023-12-15"
+      }
+    ]
+  },
+  "serkanbakisgan@gmail.com": {
+    "tasks": [
+      {
+        "id": 1,
+        "task": "Create a user-friendly admin dashboard for system management",
+        "status": true,
+        "deadline": "2023-12-20"
+      },
+      {
+        "id": 2,
+        "task": "Optimize database queries and improve overall performance",
+        "status": false,
+        "deadline": "2023-12-25"
+      },
+      {
+        "id": "4",
+        "task": "Week 7- Odevlerini Tamamlayin",
+        "status": false,
+        "deadline": "2000-05-03"
+      }
+    ]
+  },
+  "hakanbakisgan@gmail.com": {
+    "tasks": [
+      {
+        "id": 1,
+        "task": "Finish the first assignment for the semester",
+        "status": false,
+        "deadline": "2023-12-10"
+      },
+      {
+        "id": 2,
+        "task": "Study and prepare for upcoming exams",
+        "status": false,
+        "deadline": "2023-12-22"
+      },
+      {
+        "id": "4",
+        "task": "Week 7- Odevlerini Tamamlayin",
+        "status": false,
+        "deadline": "2000-05-03"
+      }
+    ]
+  },
+  "mervebakisgan@gmail.com": {
+    "tasks": [
+      {
+        "id": 1,
+        "task": "Develop a lesson plan for the upcoming week",
+        "status": true,
+        "deadline": "2023-12-18"
+      },
+      {
+        "id": 2,
+        "task": "Grade assignments submitted by students",
+        "status": false,
+        "deadline": "2023-12-14"
+      }
+    ]
+  },
+  "incibakisgan@gmail.com": {
+    "tasks": [
+      {
+        "id": 1,
+        "task": "Participate in scheduled online classes",
+        "status": false,
+        "deadline": "2023-12-12"
+      },
+      {
+        "id": 2,
+        "task": "Submit a proposal for the semester project",
+        "status": false,
+        "deadline": "2023-12-28"
+      },
+      {
+        "id": "3",
+        "task": "merhaba",
+        "status": false,
+        "deadline": "2000-01-01"
+      }
+    ]
+  },
+  "serdarbakisgan@gmail.com": {
+    "tasks": [
+      {
+        "id": 1,
+        "task": "Finish the coding assignment for the programming course",
+        "status": true,
+        "deadline": "2023-12-24"
+      },
+      {
+        "id": 2,
+        "task": "Review and provide feedback on a research paper",
+        "status": true,
+        "deadline": "2023-12-17"
+      },
+      {
+        "id": "3",
+        "task": "merhaba",
+        "status": false,
+        "deadline": "2000-01-01"
+      },
+      {
+        "id": "4",
+        "task": "Week 7- Odevlerini Tamamlayin",
+        "status": false,
+        "deadline": "2000-05-03"
+      }
+    ]
+  },
+  "merveyilmaz@gmail.com": {
+    "tasks": [
+      {
+        "id": 1,
+        "task": "Plan engaging activities for the upcoming week",
+        "status": true,
+        "deadline": "2023-12-29"
+      },
+      {
+        "id": 2,
+        "task": "Grade exams and provide feedback to students",
+        "status": false,
+        "deadline": "2023-12-23"
+      }
+    ]
+  },
+  "user8@gmail.com": {
+    "tasks": [
+      {
+        "id": 1,
+        "task": "Finish the assigned homework for the week",
+        "status": false,
+        "deadline": "2023-12-11"
+      },
+      {
+        "id": 2,
+        "task": "Prepare for the upcoming quiz in the mathematics course",
+        "status": false,
+        "deadline": "2023-12-19"
+      },
+      {
+        "id": "3",
+        "task": "merhaba",
+        "status": false,
+        "deadline": "2000-01-01"
+      }
+    ]
+  },
+  "user9@gmail.com": {
+    "tasks": [
+      {
+        "id": 1,
+        "task": "Conduct research for the semester project",
+        "status": true,
+        "deadline": "2023-12-26"
+      },
+      {
+        "id": 2,
+        "task": "Compose an essay on a given topic",
+        "status": true,
+        "deadline": "2023-12-16"
+      },
+      {
+        "id": "3",
+        "task": "merhaba",
+        "status": false,
+        "deadline": "2000-01-01"
+      },
+      {
+        "id": "4",
+        "task": "Week 7- Odevlerini Tamamlayin",
+        "status": false,
+        "deadline": "2000-05-03"
+      }
+    ]
+  },
+  "user10@gmail.com": {
+    "tasks": [
+      {
+        "id": 1,
+        "task": "Create slides for the upcoming lecture",
+        "status": true,
+        "deadline": "2023-12-13"
+      },
+      {
+        "id": 2,
+        "task": "Grade assignments submitted by students",
+        "status": false,
+        "deadline": "2023-12-21"
+      }
+    ]
+  },
+  "user11@gmail.com": {
+    "tasks": [
+      {
+        "id": 1,
+        "task": "Review and analyze user feedback for system improvements",
+        "status": true,
+        "deadline": "2023-12-27"
+      },
+      {
+        "id": 2,
+        "task": "Work on implementing a new feature for the system",
+        "status": false,
+        "deadline": "2023-12-30"
+      }
+    ]
+  },
+  "user12@gmail.com": {
+    "tasks": [
+      {
+        "id": 1,
+        "task": "Finish the coding exercise assigned for the programming course",
+        "status": true,
+        "deadline": "2023-12-15"
+      },
+      {
+        "id": 2,
+        "task": "Prepare slides and content for an upcoming presentation",
+        "status": true,
+        "deadline": "2023-12-31"
+      },
+      {
+        "id": "3",
+        "task": "merhaba",
+        "status": false,
+        "deadline": "2000-01-01"
+      },
+      {
+        "id": "4",
+        "task": "Week 7- Odevlerini Tamamlayin",
+        "status": false,
+        "deadline": "2000-05-03"
+      }
+    ]
+  },
+  "user13@gmail.com": {
+    "tasks": [
+      {
+        "id": 1,
+        "task": "Develop lesson plans for the entire semester",
+        "status": false,
+        "deadline": "2023-12-20"
+      },
+      {
+        "id": 2,
+        "task": "Grade research papers submitted by students",
+        "status": false,
+        "deadline": "2023-12-28"
+      }
+    ]
+  },
+  "user14@gmail.com": {
+    "tasks": [
+      {
+        "id": 1,
+        "task": "Review logs for system monitoring and security",
+        "status": true,
+        "deadline": "2023-12-14"
+      },
+      {
+        "id": 2,
+        "task": "Verify and validate user accounts in the system",
+        "status": false,
+        "deadline": "2023-12-22"
+      }
+    ]
+  },
+  "user15@gmail.com": {
+    "tasks": [
+      {
+        "id": 1,
+        "task": "Finish laboratory assignments for the science course",
+        "status": false,
+        "deadline": "2023-12-10"
+      },
+      {
+        "id": "4",
+        "task": "Week 7- Odevlerini Tamamlayin",
+        "status": false,
+        "deadline": "2000-05-03"
+      }
+    ]
+  }
+}

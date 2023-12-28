@@ -55,7 +55,7 @@
        ○ Create a general announcement
        ○ Chatboard screen
        ○ Creating tasks on the To Do List screen >
-
+ 
     Program/Output
        ○ In the end, there should be a program that a user can run the program on Windows 
        ○ Test the program and try to find bugs

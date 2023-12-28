@@ -1,5 +1,5 @@
 **Campus-Pulse (School Application)**
-
+ 
 First Step (Diagrams)
 < You'll prepare a “Use Case Diagram” and a  “Class Diagram” of the project and their brief  descriptions will be in the ReadMe file of the GitHub repo >
 

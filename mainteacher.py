@@ -5,6 +5,7 @@ from datetime import datetime
 import json
 from Ui_teacher_page import Ui_MainWindow
 from PyQt5.uic import loadUi
+import main
 
 class TaskManager:
     def __init__(self):
@@ -19,7 +20,7 @@ class TaskManager:
             self.tasks_data = json.load(f)
 
         try:    
-            with open('attendence.json', 'r') as f:
+            with open('attendance.json', 'r') as f:
                 self.attendance_data = json.load(f)    
         except (FileNotFoundError, json.JSONDecodeError):
             self.attendance_data = {}
@@ -52,8 +53,8 @@ class TaskManager:
         with open('announcements.json', 'w') as f:
             json.dump(self.announcements_data, f, indent=2)
 
-        # attendence.json dosyasına verileri yaz
-        with open('attendence.json', 'w') as f:
+        # attendance.json dosyasına verileri yaz
+        with open('attendance.json', 'w') as f:
             json.dump(self.attendance_data, f, indent=2)
             
     def get_all_tasks(self):
@@ -135,8 +136,17 @@ class TaskManager:
             self.attendance_data[email][meeting_type][date] = status
 
         # Update attendence.json file
-        with open('attendence.json', 'w') as f:
+        with open('attendance.json', 'w') as f:
             json.dump(self.attendance_data, f, indent=2)
+
+    def switch_chatboard(self):
+        main.stackedWidget.setCurrentIndex(6)
+        main.chatboard.fill_user_list2()
+
+    def switch_login(self):
+        main.stackedWidget.setCurrentIndex(0)
+        main.login.clear_line_edits_loginform()
+
 
 # PyQt5 UI sınıfını ornekleme
 class MyMainWindow(QMainWindow):
@@ -153,9 +163,13 @@ class MyMainWindow(QMainWindow):
         self.connect_table_signals() 
         
         self.pushButton_SchSave.clicked.connect(self.save_attendance)
-        
-        self.tableWidget_ToDoList.setColumnWidth(0, 95)  # 0. sütunun genişliği
-        self.tableWidget_ToDoList.setColumnWidth(1, 450)  # 1. sütunun genişliği
+        self.tableWidget_Students.setColumnWidth(0,100)
+        self.tableWidget_Students.setColumnWidth(1,150)
+        self.tableWidget_Students.setColumnWidth(2,250)
+        self.tableWidget_Students.setColumnWidth(3,335)
+
+        self.tableWidget_ToDoList.setColumnWidth(0, 50)  # 0. sütunun genişliği
+        self.tableWidget_ToDoList.setColumnWidth(1, 635)  # 1. sütunun genişliği
         self.tableWidget_ToDoList.setColumnWidth(2, 150)
         # Create Task butonuna tıklandığında
         self.pushButton_CreateTask.clicked.connect(self.create_task)
@@ -209,7 +223,7 @@ class MyMainWindow(QMainWindow):
             # Get students with account type 'Student' from accounts.json
             students = [data for data in self.task_manager.accounts_data.values() if data.get("Account_Type") == "Student"]
 
-            # Get distinct dates from Mentor Meeting attendance in attendence.json
+            # Get distinct dates from Mentor Meeting attendance in attendance.json
             dates = self.get_distinct_dates_from_mentor_attendance()
             print("Tarihler:", dates)
             # Set the row and column counts
@@ -389,7 +403,7 @@ class MyMainWindow(QMainWindow):
                 }
 
         # attendence.json dosyasını güncelle
-        with open('attendence.json', 'w') as f:
+        with open('attendance.json', 'w') as f:
             json.dump(self.task_manager.attendance_data, f, indent=2)
 
         QMessageBox.information(self, "Success", "Attendance records saved successfully!")
@@ -442,6 +456,9 @@ class MyMainWindow(QMainWindow):
         # Students tablosunu güncelle
         students = self.task_manager.get_students()
         self.tableWidget_Students.setRowCount(len(students))
+
+
+
 
         for row, student in enumerate(students):
             email = student.get("Email", "")

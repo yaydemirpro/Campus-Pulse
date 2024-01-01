@@ -1,200 +1,40 @@
 {
-  "admin@gmail.com": {
-    "name": "Admin",
+  "yusuf@gmail.com": {
+    "name": "Yusuf",
     "surname": "Administrator",
-    "password": "Admin123",
-    "Account_Type": "Admin",
+    "password": "12345",
+    "Account_Type": "Student",
     "Email": "admin@gmail.com",
     "Gender": "",
     "DoB": "",
     "Phone": ""
   },
-  "serkanbakisgan@gmail.com": {
+  "serkan@gmail.com": {
     "name": "Serkan",
     "surname": "Bakisgan",
     "password": "12345",
-    "Account_Type": "Student",
-    "Email": "serkanbakisgan@gmail.com",
-    "Gender": "",
-    "DoB": "",
-    "Phone": ""
-  },
-  "hakanbakisgan@gmail.com": {
-    "name": "Hakan",
-    "surname": "Bakisgan",
-    "password": "12345",
-    "Account_Type": "Student",
-    "Email": "hakanbakisgan@gmail.com",
-    "Gender": "",
-    "DoB": "",
-    "Phone": ""
-  },
-  "mervebakisgan@gmail.com": {
-    "name": "Merve",
-    "surname": "Bakisgan",
-    "password": "12345",
     "Account_Type": "Teacher",
-    "Email": "mervebakisgan@gmail.com",
+    "Email": "serkan@gmail.com",
     "Gender": "",
     "DoB": "",
     "Phone": ""
   },
-  "incibakisgan@gmail.com": {
-    "password": "AbCn12**",
-    "Account_Type": "Student",
-    "name": "",
-    "surname": "",
-    "Email": "incibakisgan@gmail.com",
-    "Gender": "",
-    "DoB": "",
-    "Phone": ""
-  },
-  "serdarbakisgan@gmail.com": {
-    "password": "AbCn12**",
-    "Account_Type": "Student",
-    "name": "Serdar",
-    "surname": "Bakisgan",
-    "Email": "serdarbakisgan@gmail.com",
-    "Gender": "",
-    "DoB": "",
-    "Phone": ""
-  },
-  "merveyilmaz@gmail.com": {
-    "password": "12345",
-    "Account_Type": "Student",
+  "merve@gmail.com": {
     "name": "Merve",
     "surname": "Yilmaz",
-    "Email": "merveyilmaz@gmail.com",
-    "Gender": "",
-    "DoB": "",
-    "Phone": ""
-  },
-  "user8@gmail.com": {
-    "password": "P@ssw0rd",
+    "password": "12345",
     "Account_Type": "Student",
-    "name": "User",
-    "surname": "Eight",
-    "Email": "user8@gmail.com",
+    "Email": "merve@gmail.com",
     "Gender": "",
     "DoB": "",
     "Phone": ""
   },
-  "user9@gmail.com": {
-    "password": "Secret789",
+  "murat@gmail.com": {
+    "name": "murat",
+    "surname": "....",
+    "password": "12345",
     "Account_Type": "Student",
-    "name": "User",
-    "surname": "Nine",
-    "Email": "user9@gmail.com",
-    "Gender": "",
-    "DoB": "",
-    "Phone": ""
-  },
-  "user10@gmail.com": {
-    "password": "SecurePwd",
-    "Account_Type": "Teacher",
-    "name": "User",
-    "surname": "Ten",
-    "Email": "user10@gmail.com",
-    "Gender": "",
-    "DoB": "",
-    "Phone": ""
-  },
-  "user11@gmail.com": {
-    "password": "Pass1234",
-    "Account_Type": "Admin",
-    "name": "User",
-    "surname": "Eleven",
-    "Email": "user11@gmail.com",
-    "Gender": "",
-    "DoB": "",
-    "Phone": ""
-  },
-  "user12@gmail.com": {
-    "password": "SecurePass",
-    "Account_Type": "Student",
-    "name": "User",
-    "surname": "Twelve",
-    "Email": "user12@gmail.com",
-    "Gender": "",
-    "DoB": "",
-    "Phone": ""
-  },
-  "user13@gmail.com": {
-    "password": "123456",
-    "Account_Type": "Teacher",
-    "name": "User",
-    "surname": "Thirteen",
-    "Email": "user13@gmail.com",
-    "Gender": "",
-    "DoB": "",
-    "Phone": ""
-  },
-  "user14@gmail.com": {
-    "password": "AbCdEf12",
-    "Account_Type": "Admin",
-    "name": "User",
-    "surname": "Fourteen",
-    "Email": "user14@gmail.com",
-    "Gender": "",
-    "DoB": "",
-    "Phone": ""
-  },
-  "user15@gmail.com": {
-    "password": "Password15",
-    "Account_Type": "Student",
-    "name": "User",
-    "surname": "Fifteen",
-    "Email": "user15@gmail.com",
-    "Gender": "",
-    "DoB": "",
-    "Phone": ""
-  },
-  "user16@gmail.com": {
-    "password": "Secure123",
-    "Account_Type": "Teacher",
-    "name": "User",
-    "surname": "Sixteen",
-    "Email": "user16@gmail.com",
-    "Gender": "",
-    "DoB": "",
-    "Phone": ""
-  },
-  "user17@gmail.com": {
-    "password": "UserPass17",
-    "Account_Type": "Admin",
-    "name": "User",
-    "surname": "Seventeen",
-    "Email": "user17@gmail.com",
-    "Gender": "",
-    "DoB": "",
-    "Phone": ""
-  },
-  "user18@gmail.com": {
-    "password": "Pass123",
-    "Account_Type": "Student",
-    "name": "User",
-    "surname": "Eighteen",
-    "Email": "user18@gmail.com",
-    "Gender": "",
-    "DoB": "",
-    "Phone": ""
-  },
-  "user19@gmail.com": {
-    "password": "SecretPwd19",
-    "Account_Type": "Teacher",
-    "name": "User",
-    "surname": "Nineteen",
-    "Email": "user19@gmail.com",
-    "Gender": "",
-    "DoB": "",
-    "Phone": ""
-  },
-  "user20@gmail.com": {
-    "password": "Pwd2020",
-    "Account_Type": "Admin",
-    "name": "User",
-    "surname": "Twenty",
-    "Email": "user20@gmail.com",
+    "Email": "murat@gmail.com",
     "Gender": "",
     "DoB": "",
     "Phone": ""

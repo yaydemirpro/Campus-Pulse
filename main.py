@@ -1,12 +1,14 @@
 import sys
 import os
-from PyQt5.QtWidgets import QApplication, QMainWindow, QStackedWidget, QMessageBox, QWidget, QTableWidget, QTableWidgetItem, QCheckBox
-from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QApplication, QMainWindow, QStackedWidget, QMessageBox, QWidget, QTableWidget, QTableWidgetItem, QCheckBox, QLabel, QCalendarWidget, QPushButton
+from PyQt5.QtCore import Qt, QTimer, QDate
 from PyQt5.uic import loadUi
 import json
 import re
 from datetime import datetime
 from PyQt5.QtGui import QColor
+import mainteacher
+
 
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
 
@@ -70,14 +72,17 @@ class Login(QMainWindow):
                     if accounts[email]["password"] == password:
                         if accounts[email]["Account_Type"] == "Student":
                             stackedWidget.setCurrentIndex(3)
-                            student.resize(825, 600)
+                            student.load_attendance()
+                            student.load_tasks()
+                            student.load_announcements()
+                            student.load_calendar_events()
+                            student.show_tasks()
+                            student.populate_table()
+                            student.show_announcements()
                         elif accounts[email]["Account_Type"] == "Teacher":
                             stackedWidget.setCurrentIndex(4)
-                            teacher.resize(825, 600)
                         elif accounts[email]["Account_Type"] == "Admin":
                             stackedWidget.setCurrentIndex(5)
-                            admin.resize(825, 600)
-                            admin.setFixedSize(825, 600)
                             admin.fill_table()
 
                     else:
@@ -369,20 +374,20 @@ class ContactAdmin(QMainWindow):
 
 
 
-class Student(QMainWindow):
-    def __init__(self):
-        super(Student, self).__init__()
-        loadUi('student.ui', self)
-        self.Back_Log_but.clicked.connect(self.switch_loginform)
+# class Student(QMainWindow):
+#     def __init__(self):
+#         super(Student, self).__init__()
+#         loadUi('student.ui', self)
+#         # self.Back_Log_but.clicked.connect(self.switch_loginform)
 
 
-    def switch_loginform(self):
-        stackedWidget.setCurrentIndex(0)
+#     def switch_loginform(self):
+#         stackedWidget.setCurrentIndex(0)
 
 class Teacher(QMainWindow):
     def __init__(self):
         super(Teacher, self).__init__()
-        loadUi('teacher.ui', self)
+        loadUi('teacher_page.ui', self)
         self.Back_Log_but.clicked.connect(self.switch_loginform)
         self.Chatboard_but.clicked.connect(self.switch_chatboard)
         
@@ -607,6 +612,11 @@ class Chatboard(QMainWindow):
         self.usertableWidget.setRowCount(len(user_accounts))
         self.usertableWidget.setColumnWidth(0, 185)
         self.usertableWidget.setColumnWidth(1, 0)
+
+
+#Emailin chats.jsonda yer almaması durumunda hata veriyor. Düzeltilmesi gerekiyor.
+        
+
         for email, data in user_accounts.items():
             if unread_list[email] > 0:
                 self.usertableWidget.setItem(
@@ -770,7 +780,244 @@ class Chatboard(QMainWindow):
         stackedWidget.setCurrentIndex(4)
 
 
+class Main_Window(QMainWindow):
+    def __init__(self):
+        super(Main_Window, self).__init__()
 
+
+        loadUi('student.ui', self)  # UI dosyasını yükle
+        # loadUi(r'C:\Users\Gebruiker\Desktop\Python\PYQT5\calendar\student - Kopya (2).ui', self)  # UI dosyasını yükle
+        self.pushButton.clicked.connect(self.switch_chatboard)
+
+        self.setFixedSize(900,600)
+        self.setWindowTitle('Campus Pulse')
+        
+        # self.mail = "merve@gmail.com"
+
+        self.note_edit = self.findChild(QLabel, 'note_edit')  # UI dosyasındaki note_edit adlı öğeyi bul
+        self.calendar = self.findChild(QCalendarWidget, 'calendarWidget')  # UI dosyasındaki calendarWidget adlı öğeyi bul
+        self.mission_complete = self.findChild(QPushButton, 'self.mission_complete') 
+
+        # self.load_attendance()
+        # self.load_tasks()
+        # self.load_announcements()
+        # self.load_calendar_events()
+        # self.show_tasks()
+        # self.populate_table()
+        # self.show_announcements()
+        self.calendar.clicked.connect(self.load_calendar_events)
+        self.comboBox_2.currentIndexChanged.connect(self.populate_table)
+        self.comboBox_3.currentIndexChanged.connect(self.populate_table)
+        # self.check()
+
+        
+
+#load file
+
+    def load_attendance(self):
+        try:
+            with open('attendance.json', 'r') as file_2:
+                self.attendance = json.load(file_2)
+        except FileNotFoundError:
+            self.attendance = {}
+
+    def load_tasks(self):
+        try:
+            with open('tasks.json', 'r') as file_3:
+                self.tasks = json.load(file_3)
+        except FileNotFoundError:
+            self.tasks = {}
+
+    def load_announcements(self):
+        try:
+            with open('announcements.json', 'r') as file_4:
+                self.announcements = json.load(file_4)
+        except FileNotFoundError:
+            self.announcements = {}
+
+#meeting calendar
+    def load_calendar_events(self):
+        self.mail = login.email_LE.text()
+        meeting = self.attendance[self.mail]
+        mentor = meeting["Mentor Meeting"]
+        data_science = meeting["Data Science"]
+        self.mail = login.email_LE.text()
+        
+        for date_str in mentor.keys():
+            date = QDate.fromString(str(date_str), Qt.ISODate)
+            if date.isValid():  #and result1==['Mentor']:
+                self.calendar.setDateTextFormat(date, self.get_calendar_event_format1())
+
+        for date_str in data_science.keys():
+            date = QDate.fromString(str(date_str), Qt.ISODate)
+            if date.isValid():  #and result2==['Data Science']:
+                self.calendar.setDateTextFormat(date, self.get_calendar_event_format2())
+
+        selected_date = self.calendar.selectedDate().toString(Qt.ISODate)
+        if selected_date in data_science:
+            self.note_edit.setText('Data Science Course')
+        elif selected_date in mentor:
+            self.note_edit.setText('Mentor Meeting')
+        else:
+            self.note_edit.clear()
+
+
+    def get_calendar_event_format1(self):
+        format = self.calendar.dateTextFormat(self.calendar.selectedDate())
+        font = format.font()
+        font.setBold(True)  # Metni bold yap
+        format.setFont(font)
+        format.setForeground(Qt.red)
+        format.setBackground(Qt.green)
+        return format
+    
+    def get_calendar_event_format2(self):
+        format = self.calendar.dateTextFormat(self.calendar.selectedDate())
+        font = format.font()
+        font.setBold(True)  # Metni bold yap
+        format.setFont(font)
+        format.setForeground(Qt.green)
+        format.setBackground(Qt.red)
+        return format   
+
+#status of attendance
+    def populate_table(self):
+        self.mail = login.email_LE.text()
+      
+        for i in range(self.tableWidget.rowCount() - 1, -1, -1):
+            is_row_empty = all(self.tableWidget.item(i, j) is None or self.tableWidget.item(i, j).text() == '' for j in range(self.tableWidget.columnCount()))
+            if not is_row_empty:
+                self.tableWidget.removeRow(i)
+
+        filter_statu1 = self.comboBox_2.currentText()
+        filter_statu2 = self.comboBox_3.currentText()
+
+        dates = self.attendance[self.mail]
+        result = dates[filter_statu1]
+        for date, value in result.items():
+
+            if value==filter_statu2 and QDate.fromString(date, "yyyy-MM-dd") <= QDate.currentDate():
+                row_position = self.tableWidget.rowCount()
+                self.tableWidget.insertRow(row_position)
+                item_date = QTableWidgetItem(date)
+                item_value = QTableWidgetItem(str(value))
+                self.tableWidget.setItem(row_position, 0, item_value)
+                self.tableWidget.setVerticalHeaderItem(row_position, item_date)
+            if filter_statu2=='Make your choice' and (filter_statu1=='Mentor Meeting' or filter_statu1=='Data Science') and QDate.fromString(date, "yyyy-MM-dd") <= QDate.currentDate():
+                row_position = self.tableWidget.rowCount()
+                self.tableWidget.insertRow(row_position)
+                item_date = QTableWidgetItem(date)
+                item_value = QTableWidgetItem(str(value))
+                self.tableWidget.setItem(row_position, 0, item_value)
+                self.tableWidget.setVerticalHeaderItem(row_position, item_date)
+
+                # value_str = str(value)
+                # symbol = '\u2717'
+                # value_with_symbol = f"{value_str} {symbol}"
+
+                # # QTableWidgetItem oluştur ve tabloya ekle
+                # item_value = QTableWidgetItem(value_with_symbol)
+                # self.tableWidget.setItem(row_position, 0, item_value)
+                # self.tableWidget.setVerticalHeaderItem(row_position, item_date)
+
+# to do list
+    def show_tasks(self):
+        self.mail = login.email_LE.text()
+        assignment=self.tasks[self.mail]
+        self.mission=assignment['tasks']
+        self.check_boxes = []
+
+        
+        for i in self.mission:
+            row_position = self.table_todolist.rowCount()
+            
+            self.table_todolist.insertRow(row_position)
+            self.table_todolist.setItem(row_position, 1, QTableWidgetItem(str(i['task'])))
+            self.table_todolist.setItem(row_position, 2, QTableWidgetItem(i['deadline']))
+            self.table_todolist.setVerticalHeaderItem(row_position, QTableWidgetItem(str(i['id'])))
+            
+            self.check_box = QCheckBox()
+            if self.mission[row_position]['status'] == True:
+                self.check_box.setChecked(True)
+            else:
+                self.check_box.setChecked(False)
+            self.table_todolist.setCellWidget(row_position,0, self.check_box)
+
+            self.check_boxes.append(self.check_box)
+
+        
+
+        self.table_todolist.setColumnWidth(0,30)
+        self.table_todolist.setColumnWidth(1,450)
+        self.table_todolist.setColumnWidth(2,100)
+     
+
+        self.connect_check_boxes()
+
+# to do list check
+    def connect_check_boxes(self):
+        for row, check_box in enumerate(self.check_boxes):
+            check_box.stateChanged.connect(lambda state, r=row: self.onCheckBoxStateChanged(state, r))
+
+    def onCheckBoxStateChanged(self, state, row):
+        self.mail = login.email_LE.text()
+        self.assignment=self.tasks[self.mail]
+
+        if state == 2:  # Qt.Checked
+            self.mission[row]['status'] = True   
+        else:
+            self.mission[row]['status'] = False 
+
+        with open('tasks.json', 'w') as json_file:
+                json.dump(self.tasks, json_file, indent=2)
+        # print(self.mission[row]['status'])
+            
+
+
+# # announcements
+    def show_announcements(self):
+        # content=self.announcements["content"]
+        # print(t)
+        # for k in self.announcements:
+            # row = self.announcement_widget.rowCount()
+            
+            # self.announcement_widget.insertRow(row)
+            # self.announcement_widget.setItem(row, 0, QTableWidgetItem(k["content"]))
+            # self.announcement_widget.setVerticalHeaderItem(row_position, QTableWidgetItem(str(i['id'])))
+            
+        self.announcement_index = 0  # Sıradaki anonsun indeksi
+
+        # QTimer oluştur
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.update_announcements)
+        self.timer.start(1500)  # 5 saniyede bir kontrol et
+        self.update_announcements()  # Başlangıçta da çalıştır
+
+    def update_announcements(self):
+        # Anonsları güncelle
+        if self.announcement_index < len(self.announcements):
+            announcement = self.announcements[self.announcement_index]
+            last_date = announcement.get("last_date")
+            current_date = datetime.now().strftime("%Y-%m-%d")
+            if last_date >= current_date:
+                self.announcement_textedit.setText('')
+                self.announcement_textedit.setText('  \u2605  ' + announcement['content']) #ekranda sola bitisik yazmasin
+ 
+                
+
+            # Bir sonraki anonsa geç
+            self.announcement_index += 1
+        else:
+            # Anons listesinin sonuna gelindiğinde başa dön
+            self.announcement_index = 0
+    
+    def switch_chatboard(self):
+        stackedWidget.setCurrentIndex(6)
+        chatboard.fill_user_list2()
+
+    def switch_login(self):
+        stackedWidget.setCurrentIndex(0)
+        login.clear_line_edits_loginform()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
@@ -780,8 +1027,8 @@ if __name__ == '__main__':
     login = Login()
     signup = Signup()
     cont_admin = ContactAdmin()
-    student=Student()
-    teacher=Teacher()
+    student=Main_Window()
+    teacher=mainteacher.MyMainWindow()
     admin=Admin()
     chatboard=Chatboard()
 

@@ -68,6 +68,12 @@
         "task": "Deneme2",
         "status": false,
         "deadline": "2024-01-24"
+      },
+      {
+        "id": "7",
+        "task": "Yeni g\u00f6rev",
+        "status": false,
+        "deadline": "2024-01-18"
       }
     ]
   },

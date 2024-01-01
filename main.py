@@ -559,7 +559,7 @@ class Chatboard(QMainWindow):
         self.usertableWidget.setColumnCount(2)
         self.usertableWidget.setHorizontalHeaderLabels(["Name","Email"])
         # self.fill_user_list2()
-        self.Back_TF_but.clicked.connect(self.switch_teacherform)
+        self.Back_TF_but.clicked.connect(self.switch_previous_form)
         self.Send_but.clicked.connect(self.send_message)
         self.usertableWidget.itemSelectionChanged.connect(self.selection)
         self.history_LE.setReadOnly(True)
@@ -777,8 +777,13 @@ class Chatboard(QMainWindow):
         self.selection()
 
         
-    def switch_teacherform(self):
-        stackedWidget.setCurrentIndex(4)
+    def switch_previous_form(self):
+        with open("accounts.json", "r") as userinfo:
+            accounts = json.load(userinfo)
+        if accounts[login.email_LE.text()]["Account_Type"]=="Student":
+            stackedWidget.setCurrentIndex(3)
+        elif accounts[login.email_LE.text()]["Account_Type"]=="Teacher" or accounts[login.email_LE]["Account_Type"]=="Admin":
+            stackedWidget.setCurrentIndex(4)
 
 
 class Main_Window(QMainWindow):

@@ -989,7 +989,7 @@ class Main_Window(QMainWindow):
             
 
 
-# # announcements
+# # announcements  
     def show_announcements(self):
         # content=self.announcements["content"]
         # print(t)

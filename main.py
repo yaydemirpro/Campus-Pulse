@@ -81,8 +81,10 @@ class Login(QMainWindow):
                             student.show_announcements()
                         elif accounts[email]["Account_Type"] == "Teacher":
                             stackedWidget.setCurrentIndex(4)
+                            teacher.label_Name.setText(accounts[login.email_LE.text()]["name"]+" "+accounts[login.email_LE.text()]["surname"])
                         elif accounts[email]["Account_Type"] == "Admin":
                             stackedWidget.setCurrentIndex(5)
+                            teacher.label_Name.setText(accounts[login.email_LE.text()]["name"]+" "+accounts[login.email_LE.text()]["surname"])
                             admin.fill_table()
 
                     else:
@@ -417,8 +419,8 @@ class Admin(QMainWindow):
         super(Admin, self).__init__()
         loadUi('admin.ui', self)
 
-        self.Back_Log_but.clicked.connect(self.switch_loginform)
-        self.Back_Log_but.clicked.connect(self.switch_chatboard)
+        self.Back_Log_but.clicked.connect(self.switch_teacherform)
+        self.Chatboard_but.clicked.connect(self.switch_chatboard)
         self.Approve_but.clicked.connect(self.approve_account)
         self.Discard_but.clicked.connect(self.discard_account)
         self.tableWidget.setColumnWidth(0,50)
@@ -531,8 +533,12 @@ class Admin(QMainWindow):
             self.tableWidget.setItem(row, 3, QTableWidgetItem(pending_accounts_rest[emails]["surname"]))
             row += 1   
 
-    def switch_loginform(self):
-        stackedWidget.setCurrentIndex(0)
+    def switch_teacherform(self):
+        stackedWidget.setCurrentIndex(4)
+
+    def switch_chatboard(self):
+        stackedWidget.setCurrentIndex(6)
+        chatboard.fill_user_list2()
     
 class Chatboard(QMainWindow):
     """
@@ -783,8 +789,10 @@ class Chatboard(QMainWindow):
             accounts = json.load(userinfo)
         if accounts[login.email_LE.text()]["Account_Type"]=="Student":
             stackedWidget.setCurrentIndex(3)
-        elif accounts[login.email_LE.text()]["Account_Type"]=="Teacher" or accounts[login.email_LE]["Account_Type"]=="Admin":
+        elif accounts[login.email_LE.text()]["Account_Type"]=="Teacher":
             stackedWidget.setCurrentIndex(4)
+        elif accounts[login.email_LE.text()]["Account_Type"]=="Admin":
+            stackedWidget.setCurrentIndex(5)
     
     def switch_chatboard(self):
         stackedWidget.setCurrentIndex(6)
@@ -1082,10 +1090,3 @@ if __name__ == '__main__':
 
     stackedWidget.show()
     sys.exit(app.exec_())
-
-
-
-
-#bir hesap attendance listesinde yer almıyorsa hata veriyor ve kapanıyor. Bunu ve benzeri hataları önlemek adına, sign up yapıldığında ilgili dosyalarda kayıt oluşturulabilir
-# 1. Attendance için, kurs ve meeting takvimi bir dosyada tutulsa, kurs takviminde bir değişiklik yapıldığında tüm userların datası değişse mi? 
-#2. Signup yaparken attendanceda içi boş hesap oluşalım mı?

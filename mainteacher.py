@@ -13,6 +13,7 @@ class TaskManager:
 
     def load_data(self):
         # accounts.json, tasks.json ve announcements.json dosyalarını oku
+        
         with open('accounts.json', 'r') as f:
             self.accounts_data = json.load(f)
 

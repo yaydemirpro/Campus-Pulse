@@ -28,7 +28,7 @@ class Login(QMainWindow):
         """
         Initializes the Login window.
 
-        Connects signals to corresponding slots and loads the UI from 'login.ui'.
+        Connects signals to corresponding slots and loads the UI from 'login.ui'.  
         """
         super(Login, self).__init__()
         loadUi('login.ui', self)

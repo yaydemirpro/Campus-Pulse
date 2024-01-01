@@ -67,6 +67,18 @@ class Login(QMainWindow):
         try:
             with open("accounts.json", "r") as userinfo:
                 accounts = json.load(userinfo)
+                userprofile.name_line.setText(accounts[email]["name"])
+                userprofile.surname_line.setText(accounts[email]["surname"])
+                userprofile.telephone_line.setText(accounts[email]["Phone"])
+                userprofile.mail_line.setText(accounts[email]["Email"])
+                userprofile.type_line.setText(accounts[email]["Account_Type"])
+                userprofile.gender_line.setText(accounts[email]["Gender"])
+                userprofile.birthdate_line.setText(accounts[email]["DoB"])
+                student.label_2.setText("Welcome, "+accounts[email]["name"])
+                student.label.setText(accounts[email]["name"]+" "+accounts[email]["surname"])
+
+
+
 
                 if email in accounts:
                     if accounts[email]["password"] == password:
@@ -79,6 +91,7 @@ class Login(QMainWindow):
                             student.show_tasks()
                             student.populate_table()
                             student.show_announcements()
+
                         elif accounts[email]["Account_Type"] == "Teacher":
                             stackedWidget.setCurrentIndex(4)
                             teacher.label_Name.setText(accounts[login.email_LE.text()]["name"]+" "+accounts[login.email_LE.text()]["surname"])
@@ -399,6 +412,37 @@ class Teacher(QMainWindow):
     def switch_chatboard(self):
         stackedWidget.setCurrentIndex(6)
         chatboard.fill_user_list2()
+
+class User_Profile(QMainWindow):
+    def __init__(self):
+        super(User_Profile, self).__init__()
+        loadUi('user_profile_information.ui', self)
+        self.save_pushButton.clicked.connect(self.save_profile)
+        self.Back_Button.clicked.connect(self.switch_previous_form)
+        
+    def save_profile(self):
+        user_mail=login.email_LE.text()
+        with open("accounts.json", "r") as userinfo:
+            accounts = json.load(userinfo)
+        accounts[user_mail]["name"]=userprofile.name_line.text()
+        accounts[user_mail]["surname"]=userprofile.surname_line.text()
+        accounts[user_mail]["Phone"]=userprofile.telephone_line.text()
+        accounts[user_mail]["Gender"]=userprofile.gender_line.text()
+        accounts[user_mail]["DoB"]=userprofile.birthdate_line.text()
+
+        with open("accounts.json", "w") as userinfo:
+            json.dump(accounts, userinfo, indent=2)
+
+    def switch_previous_form(self):
+        with open("accounts.json", "r") as userinfo:
+            accounts = json.load(userinfo)
+        if accounts[login.email_LE.text()]["Account_Type"]=="Student":
+            stackedWidget.setCurrentIndex(3)
+        elif accounts[login.email_LE.text()]["Account_Type"]=="Teacher":
+            stackedWidget.setCurrentIndex(4)
+        elif accounts[login.email_LE.text()]["Account_Type"]=="Admin":
+            stackedWidget.setCurrentIndex(5)
+
 
 class Admin(QMainWindow):
     """
@@ -807,6 +851,7 @@ class Main_Window(QMainWindow):
         loadUi('student.ui', self)  # UI dosyasını yükle
         # loadUi(r'C:\Users\Gebruiker\Desktop\Python\PYQT5\calendar\student - Kopya (2).ui', self)  # UI dosyasını yükle
         self.pushButton.clicked.connect(self.switch_chatboard)
+        self.pushButton_2.clicked.connect(self.switch_userprofile)
 
         self.setFixedSize(900,600)
         self.setWindowTitle('Campus Pulse')
@@ -976,7 +1021,7 @@ class Main_Window(QMainWindow):
         
 
             self.table_todolist.setColumnWidth(0,30)
-            self.table_todolist.setColumnWidth(1,450)
+            self.table_todolist.setColumnWidth(1,415)
             self.table_todolist.setColumnWidth(2,100)
      
 
@@ -1035,8 +1080,6 @@ class Main_Window(QMainWindow):
             if last_date >= current_date:
                 self.announcement_textedit.setText('')
                 self.announcement_textedit.setText('  \u2605  ' + announcement['content']) #ekranda sola bitisik yazmasin
- 
-                
 
             # Bir sonraki anonsa geç
             self.announcement_index += 1
@@ -1051,6 +1094,9 @@ class Main_Window(QMainWindow):
     def switch_login(self):
         stackedWidget.setCurrentIndex(0)
         login.clear_line_edits_loginform()
+    
+    def switch_userprofile(self):
+        stackedWidget.setCurrentIndex(7)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
@@ -1064,6 +1110,7 @@ if __name__ == '__main__':
     teacher=mainteacher.MyMainWindow()
     admin=Admin()
     chatboard=Chatboard()
+    userprofile=User_Profile()
 
 
 
@@ -1074,6 +1121,7 @@ if __name__ == '__main__':
     teacher.setFixedSize(900, 600)
     admin.setFixedSize(900, 600)
     chatboard.setFixedSize(900, 600)
+    userprofile.setFixedSize(900, 600)
 
 
 
@@ -1086,6 +1134,8 @@ if __name__ == '__main__':
     stackedWidget.addWidget(teacher)
     stackedWidget.addWidget(admin)
     stackedWidget.addWidget(chatboard)
+    stackedWidget.addWidget(userprofile)
+
 
 
     stackedWidget.show()

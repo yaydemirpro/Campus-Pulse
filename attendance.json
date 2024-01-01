@@ -23,9 +23,16 @@
       "2024-02-15": "Attend"
     }
   },
-  "admin@gmail.com": {
+  "hakan@gmail.com": {
+    "Mentor Meeting": {
+      "2023-12-28": "Not Attend",
+      "2024-01-01": "Attend",
+      "2024-02-14": "Not Attend"
+    },
     "Data Science": {
-      "2024-01-16": "Not Attended"
+      "2023-12-25": "Attend",
+      "2023-01-03": "Attend",
+      "2024-02-15": "Attend"
     }
   }
 }

@@ -618,7 +618,8 @@ class Chatboard(QMainWindow):
         
 
         for email, data in user_accounts.items():
-            if unread_list[email] > 0:
+            unread_count = unread_list.get(email, 0)
+            if unread_count > 0:
                 self.usertableWidget.setItem(
                     row,
                     0,
@@ -792,7 +793,6 @@ class Main_Window(QMainWindow):
         self.setFixedSize(900,600)
         self.setWindowTitle('Campus Pulse')
         
-        # self.mail = "merve@gmail.com"
 
         self.note_edit = self.findChild(QLabel, 'note_edit')  # UI dosyasındaki note_edit adlı öğeyi bul
         self.calendar = self.findChild(QCalendarWidget, 'calendarWidget')  # UI dosyasındaki calendarWidget adlı öğeyi bul
@@ -838,28 +838,31 @@ class Main_Window(QMainWindow):
 #meeting calendar
     def load_calendar_events(self):
         self.mail = login.email_LE.text()
-        meeting = self.attendance[self.mail]
-        mentor = meeting["Mentor Meeting"]
-        data_science = meeting["Data Science"]
-        self.mail = login.email_LE.text()
+
+        if self.mail in self.attendance:
+            meeting = self.attendance[self.mail]
+            mentor = meeting["Mentor Meeting"]
+            data_science = meeting["Data Science"]
         
-        for date_str in mentor.keys():
-            date = QDate.fromString(str(date_str), Qt.ISODate)
-            if date.isValid():  #and result1==['Mentor']:
-                self.calendar.setDateTextFormat(date, self.get_calendar_event_format1())
+            for date_str in mentor.keys():
+                date = QDate.fromString(str(date_str), Qt.ISODate)
+                if date.isValid():  #and result1==['Mentor']:
+                    self.calendar.setDateTextFormat(date, self.get_calendar_event_format1())
 
-        for date_str in data_science.keys():
-            date = QDate.fromString(str(date_str), Qt.ISODate)
-            if date.isValid():  #and result2==['Data Science']:
-                self.calendar.setDateTextFormat(date, self.get_calendar_event_format2())
+            for date_str in data_science.keys():
+                date = QDate.fromString(str(date_str), Qt.ISODate)
+                if date.isValid():  #and result2==['Data Science']:
+                    self.calendar.setDateTextFormat(date, self.get_calendar_event_format2())
 
-        selected_date = self.calendar.selectedDate().toString(Qt.ISODate)
-        if selected_date in data_science:
-            self.note_edit.setText('Data Science Course')
-        elif selected_date in mentor:
-            self.note_edit.setText('Mentor Meeting')
+            selected_date = self.calendar.selectedDate().toString(Qt.ISODate)
+            if selected_date in data_science:
+                self.note_edit.setText('Data Science Course')
+            elif selected_date in mentor:
+                self.note_edit.setText('Mentor Meeting')
+            else:
+                self.note_edit.clear()
         else:
-            self.note_edit.clear()
+            pass
 
 
     def get_calendar_event_format1(self):
@@ -883,33 +886,37 @@ class Main_Window(QMainWindow):
 #status of attendance
     def populate_table(self):
         self.mail = login.email_LE.text()
+
+        if self.mail in self.attendance:
       
-        for i in range(self.tableWidget.rowCount() - 1, -1, -1):
-            is_row_empty = all(self.tableWidget.item(i, j) is None or self.tableWidget.item(i, j).text() == '' for j in range(self.tableWidget.columnCount()))
-            if not is_row_empty:
-                self.tableWidget.removeRow(i)
+            for i in range(self.tableWidget.rowCount() - 1, -1, -1):
+                is_row_empty = all(self.tableWidget.item(i, j) is None or self.tableWidget.item(i, j).text() == '' for j in range(self.tableWidget.columnCount()))
+                if not is_row_empty:
+                    self.tableWidget.removeRow(i)
 
-        filter_statu1 = self.comboBox_2.currentText()
-        filter_statu2 = self.comboBox_3.currentText()
+            filter_statu1 = self.comboBox_2.currentText()
+            filter_statu2 = self.comboBox_3.currentText()
 
-        dates = self.attendance[self.mail]
-        result = dates[filter_statu1]
-        for date, value in result.items():
+            dates = self.attendance[self.mail]
+            result = dates[filter_statu1]
+            for date, value in result.items():
 
-            if value==filter_statu2 and QDate.fromString(date, "yyyy-MM-dd") <= QDate.currentDate():
-                row_position = self.tableWidget.rowCount()
-                self.tableWidget.insertRow(row_position)
-                item_date = QTableWidgetItem(date)
-                item_value = QTableWidgetItem(str(value))
-                self.tableWidget.setItem(row_position, 0, item_value)
-                self.tableWidget.setVerticalHeaderItem(row_position, item_date)
-            if filter_statu2=='Make your choice' and (filter_statu1=='Mentor Meeting' or filter_statu1=='Data Science') and QDate.fromString(date, "yyyy-MM-dd") <= QDate.currentDate():
-                row_position = self.tableWidget.rowCount()
-                self.tableWidget.insertRow(row_position)
-                item_date = QTableWidgetItem(date)
-                item_value = QTableWidgetItem(str(value))
-                self.tableWidget.setItem(row_position, 0, item_value)
-                self.tableWidget.setVerticalHeaderItem(row_position, item_date)
+                if value==filter_statu2 and QDate.fromString(date, "yyyy-MM-dd") <= QDate.currentDate():
+                    row_position = self.tableWidget.rowCount()
+                    self.tableWidget.insertRow(row_position)
+                    item_date = QTableWidgetItem(date)
+                    item_value = QTableWidgetItem(str(value))
+                    self.tableWidget.setItem(row_position, 0, item_value)
+                    self.tableWidget.setVerticalHeaderItem(row_position, item_date)
+                if filter_statu2=='Make your choice' and (filter_statu1=='Mentor Meeting' or filter_statu1=='Data Science') and QDate.fromString(date, "yyyy-MM-dd") <= QDate.currentDate():
+                    row_position = self.tableWidget.rowCount()
+                    self.tableWidget.insertRow(row_position)
+                    item_date = QTableWidgetItem(date)
+                    item_value = QTableWidgetItem(str(value))
+                    self.tableWidget.setItem(row_position, 0, item_value)
+                    self.tableWidget.setVerticalHeaderItem(row_position, item_date)
+        else:
+            pass
 
                 # value_str = str(value)
                 # symbol = '\u2717'
@@ -923,36 +930,41 @@ class Main_Window(QMainWindow):
 # to do list
     def show_tasks(self):
         self.mail = login.email_LE.text()
-        assignment=self.tasks[self.mail]
-        self.mission=assignment['tasks']
-        self.check_boxes = []
+
+        if self.mail in self.tasks:
+
+            assignment=self.tasks[self.mail]
+            self.mission=assignment['tasks']
+            self.check_boxes = []
 
         
-        for i in self.mission:
-            row_position = self.table_todolist.rowCount()
+            for i in self.mission:
+                row_position = self.table_todolist.rowCount()
             
-            self.table_todolist.insertRow(row_position)
-            self.table_todolist.setItem(row_position, 1, QTableWidgetItem(str(i['task'])))
-            self.table_todolist.setItem(row_position, 2, QTableWidgetItem(i['deadline']))
-            self.table_todolist.setVerticalHeaderItem(row_position, QTableWidgetItem(str(i['id'])))
+                self.table_todolist.insertRow(row_position)
+                self.table_todolist.setItem(row_position, 1, QTableWidgetItem(str(i['task'])))
+                self.table_todolist.setItem(row_position, 2, QTableWidgetItem(i['deadline']))
+                self.table_todolist.setVerticalHeaderItem(row_position, QTableWidgetItem(str(i['id'])))
             
-            self.check_box = QCheckBox()
-            if self.mission[row_position]['status'] == True:
-                self.check_box.setChecked(True)
-            else:
-                self.check_box.setChecked(False)
-            self.table_todolist.setCellWidget(row_position,0, self.check_box)
+                self.check_box = QCheckBox()
+                if self.mission[row_position]['status'] == True:
+                    self.check_box.setChecked(True)
+                else:
+                    self.check_box.setChecked(False)
+                self.table_todolist.setCellWidget(row_position,0, self.check_box)
 
-            self.check_boxes.append(self.check_box)
+                self.check_boxes.append(self.check_box)
 
         
 
-        self.table_todolist.setColumnWidth(0,30)
-        self.table_todolist.setColumnWidth(1,450)
-        self.table_todolist.setColumnWidth(2,100)
+            self.table_todolist.setColumnWidth(0,30)
+            self.table_todolist.setColumnWidth(1,450)
+            self.table_todolist.setColumnWidth(2,100)
      
 
-        self.connect_check_boxes()
+            self.connect_check_boxes()
+        else:
+            pass
 
 # to do list check
     def connect_check_boxes(self):
@@ -961,15 +973,18 @@ class Main_Window(QMainWindow):
 
     def onCheckBoxStateChanged(self, state, row):
         self.mail = login.email_LE.text()
-        self.assignment=self.tasks[self.mail]
+        if self.mail in self.tasks:
+            self.assignment=self.tasks[self.mail]
 
-        if state == 2:  # Qt.Checked
-            self.mission[row]['status'] = True   
+            if state == 2:  # Qt.Checked
+                self.mission[row]['status'] = True   
+            else:
+                self.mission[row]['status'] = False 
+
+            with open('tasks.json', 'w') as json_file:
+                    json.dump(self.tasks, json_file, indent=2)
         else:
-            self.mission[row]['status'] = False 
-
-        with open('tasks.json', 'w') as json_file:
-                json.dump(self.tasks, json_file, indent=2)
+            pass
         # print(self.mission[row]['status'])
             
 
@@ -1058,3 +1073,9 @@ if __name__ == '__main__':
     stackedWidget.show()
     sys.exit(app.exec_())
 
+
+
+
+#bir hesap attendance listesinde yer almıyorsa hata veriyor ve kapanıyor. Bunu ve benzeri hataları önlemek adına, sign up yapıldığında ilgili dosyalarda kayıt oluşturulabilir
+# 1. Attendance için, kurs ve meeting takvimi bir dosyada tutulsa, kurs takviminde bir değişiklik yapıldığında tüm userların datası değişse mi? 
+#2. Signup yaparken attendanceda içi boş hesap oluşalım mı?

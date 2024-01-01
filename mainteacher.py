@@ -190,7 +190,7 @@ class MyMainWindow(QMainWindow):
         # Get students and dates from your data
         students = self.task_manager.get_students()
         dates = self.get_distinct_dates_from_attendance()
-        print("Tarihler:", dates)
+        # print("Tarihler:", dates)
 
         # Set the row and column counts
         self.tableWidget_cattendencetable.setRowCount(len(students) + 1)  # +1 for the header row
@@ -198,7 +198,7 @@ class MyMainWindow(QMainWindow):
 
         # Set the headers
         headers = ["Name","Surname","Email"] + dates
-        print("Başlıklar:", headers)
+        # print("Başlıklar:", headers)
 
         self.tableWidget_cattendencetable.setHorizontalHeaderLabels(headers)
 
@@ -225,14 +225,14 @@ class MyMainWindow(QMainWindow):
 
             # Get distinct dates from Mentor Meeting attendance in attendance.json
             dates = self.get_distinct_dates_from_mentor_attendance()
-            print("Tarihler:", dates)
+            # print("Tarihler:", dates)
             # Set the row and column counts
             self.tableWidget_mattendencetable.setRowCount(len(students))
             self.tableWidget_mattendencetable.setColumnCount(len(dates) + 3)  # +3 for Name, Surname, Email columns
 
             # Set the headers
             headers = ["Name", "Surname", "Email"] + dates
-            print("Başlıklar:", headers)
+            # print("Başlıklar:", headers)
 
             self.tableWidget_mattendencetable.setHorizontalHeaderLabels(headers)
 
@@ -259,7 +259,7 @@ class MyMainWindow(QMainWindow):
         for student_attendance in self.task_manager.attendance_data.values():
             for course_dates in student_attendance.values():
                 all_dates.extend(course_dates.keys())
-        print(all_dates)
+        # print(all_dates)
         return list(set(all_dates))
 
     def get_attendance_status(self, email, date, meeting_type):

@@ -3,7 +3,7 @@
     "name": "Yusuf",
     "surname": "Administrator",
     "password": "12345",
-    "Account_Type": "Student",
+    "Account_Type": "Admin",
     "Email": "admin@gmail.com",
     "Gender": "",
     "DoB": "",

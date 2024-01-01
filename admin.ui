@@ -107,8 +107,8 @@ background-color: rgb(170, 0, 0);</string>
    <widget class="QPushButton" name="Chatboard_but">
     <property name="geometry">
      <rect>
-      <x>650</x>
-      <y>440</y>
+      <x>490</x>
+      <y>500</y>
       <width>131</width>
       <height>31</height>
      </rect>
@@ -127,7 +127,7 @@ background-color: rgb(170, 0, 0);</string>
      <x>0</x>
      <y>0</y>
      <width>816</width>
-     <height>21</height>
+     <height>18</height>
     </rect>
    </property>
   </widget>

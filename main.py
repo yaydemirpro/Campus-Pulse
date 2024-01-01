@@ -418,6 +418,7 @@ class Admin(QMainWindow):
         loadUi('admin.ui', self)
 
         self.Back_Log_but.clicked.connect(self.switch_loginform)
+        self.Back_Log_but.clicked.connect(self.switch_chatboard)
         self.Approve_but.clicked.connect(self.approve_account)
         self.Discard_but.clicked.connect(self.discard_account)
         self.tableWidget.setColumnWidth(0,50)
@@ -784,6 +785,10 @@ class Chatboard(QMainWindow):
             stackedWidget.setCurrentIndex(3)
         elif accounts[login.email_LE.text()]["Account_Type"]=="Teacher" or accounts[login.email_LE]["Account_Type"]=="Admin":
             stackedWidget.setCurrentIndex(4)
+    
+    def switch_chatboard(self):
+        stackedWidget.setCurrentIndex(6)
+        chatboard.fill_user_list2()
 
 
 class Main_Window(QMainWindow):

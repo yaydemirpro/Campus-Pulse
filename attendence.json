@@ -1,0 +1,68 @@
+{
+  "merveyilmaz@gmail.com": {
+    "Mentor Meeting": {
+      "2023-12-28": "Not Attended",
+      "2024-01-01": "Not Attended",
+      "2024-02-14": "Not Attended"
+    },
+    "Data Science": {
+      "2023-12-28": "Not Attended",
+      "2024-01-01": "Not Attended",
+      "2024-02-14": "Not Attended"
+    }
+  },
+  "serkanbakisgan@gmail.com": {
+    "Data Science": {
+      "2024-01-15": "Not Attended",
+      "2024-01-01": "N/A"
+    },
+    "Mentor Meeting": {
+      "2024-01-01": "Attended",
+      "2023-12-28": "Not  Attended"
+    }
+  },
+  "hakanbakisgan@gmail.com": {
+    "Data Science": {
+      "2024-01-15": "Not Attended",
+      "2024-01-01": "Not Attended"
+    },
+    "Mentor Meeting": {
+      "2024-01-01": "N/A"
+    }
+  },
+  "user8@gmail.com": {
+    "Data Science": {
+      "2024-01-15": "Not Attended",
+      "2024-01-01": "Not Attended"
+    },
+    "Mentor Meeting": {
+      "2024-02-14": "N/A"
+    }
+  },
+  "user12@gmail.com": {
+    "Data Science": {
+      "2024-01-15": "Not Attended",
+      "2024-02-14": "N/A"
+    },
+    "Mentor Meeting": {
+      "2023-12-28": "Not  Attended"
+    }
+  },
+  "user9@gmail.com": {
+    "Mentor Meeting": {
+      "2023-12-28": "Not Attended"
+    },
+    "Data Science": {
+      "2024-02-14": "N/A"
+    }
+  },
+  "user18@gmail.com": {
+    "Mentor Meeting": {
+      "2024-01-01": "Not Attended"
+    },
+    "Data Science": {
+      "2024-01-15": "N/A",
+      "2024-01-01": "Not Attended"
+    }
+  }
+}

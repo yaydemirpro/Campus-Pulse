@@ -30,28 +30,22 @@
         "deadline": "2023-12-25"
       },
       {
-        "id": "4",
-        "task": "Week 7- Odevlerini Tamamlayin",
+        "id": "5",
+        "task": "Complete your project until 4 January. Good Luck.",
         "status": false,
-        "deadline": "2000-05-03"
+        "deadline": "2024-01-04"
       },
       {
         "id": "6",
-        "task": "deneme 102",
+        "task": "Test your code until Wednesday",
         "status": false,
-        "deadline": "2000-03-03"
+        "deadline": "2024-01-03"
       },
       {
-        "id": "8",
-        "task": "id sort",
+        "id": "7",
+        "task": "Present your project application on 4 January",
         "status": false,
-        "deadline": "2000-05-05"
-      },
-      {
-        "id": "9",
-        "task": "cumartesi",
-        "status": false,
-        "deadline": "2000-07-01"
+        "deadline": "2024-01-04"
       }
     ]
   },
@@ -70,28 +64,22 @@
         "deadline": "2023-12-22"
       },
       {
-        "id": "4",
-        "task": "Week 7- Odevlerini Tamamlayin",
+        "id": "5",
+        "task": "Complete your project until 4 January. Good Luck.",
         "status": false,
-        "deadline": "2000-05-03"
+        "deadline": "2024-01-04"
       },
       {
         "id": "6",
-        "task": "deneme 102",
+        "task": "Test your code until Wednesday",
         "status": false,
-        "deadline": "2000-03-03"
+        "deadline": "2024-01-03"
       },
       {
         "id": "7",
-        "task": "id kontrol",
+        "task": "Present your project application on 4 January",
         "status": false,
-        "deadline": "2000-04-04"
-      },
-      {
-        "id": "9",
-        "task": "cumartesi",
-        "status": false,
-        "deadline": "2000-07-01"
+        "deadline": "2024-01-04"
       }
     ]
   },
@@ -126,34 +114,10 @@
         "deadline": "2023-12-28"
       },
       {
-        "id": "3",
-        "task": "merhaba",
+        "id": "5",
+        "task": "Complete your project until 4 January. Good Luck.",
         "status": false,
-        "deadline": "2000-01-01"
-      },
-      {
-        "id": "6",
-        "task": "deneme 102",
-        "status": false,
-        "deadline": "2000-03-03"
-      },
-      {
-        "id": "7",
-        "task": "id kontrol",
-        "status": false,
-        "deadline": "2000-04-04"
-      },
-      {
-        "id": "8",
-        "task": "id sort",
-        "status": false,
-        "deadline": "2000-05-05"
-      },
-      {
-        "id": "9",
-        "task": "cumartesi",
-        "status": false,
-        "deadline": "2000-07-01"
+        "deadline": "2024-01-04"
       }
     ]
   },
@@ -178,34 +142,16 @@
         "deadline": "2000-01-01"
       },
       {
-        "id": "4",
-        "task": "Week 7- Odevlerini Tamamlayin",
-        "status": false,
-        "deadline": "2000-05-03"
-      },
-      {
         "id": "5",
-        "task": "Id kontrol",
+        "task": "Complete your project until 4 January. Good Luck.",
         "status": false,
-        "deadline": "2001-08-03"
+        "deadline": "2024-01-04"
       },
       {
         "id": "7",
-        "task": "id kontrol",
+        "task": "Present your project application on 4 January",
         "status": false,
-        "deadline": "2000-04-04"
-      },
-      {
-        "id": "8",
-        "task": "id sort",
-        "status": false,
-        "deadline": "2000-05-05"
-      },
-      {
-        "id": "9",
-        "task": "cumartesi",
-        "status": false,
-        "deadline": "2000-07-01"
+        "deadline": "2024-01-04"
       }
     ]
   },
@@ -222,6 +168,24 @@
         "task": "Grade exams and provide feedback to students",
         "status": false,
         "deadline": "2023-12-23"
+      },
+      {
+        "id": "5",
+        "task": "Complete your project until 4 January. Good Luck.",
+        "status": false,
+        "deadline": "2024-01-04"
+      },
+      {
+        "id": "6",
+        "task": "Test your code until Wednesday",
+        "status": false,
+        "deadline": "2024-01-03"
+      },
+      {
+        "id": "7",
+        "task": "Present your project application on 4 January",
+        "status": false,
+        "deadline": "2024-01-04"
       }
     ]
   },
@@ -240,34 +204,10 @@
         "deadline": "2023-12-19"
       },
       {
-        "id": "3",
-        "task": "merhaba",
-        "status": false,
-        "deadline": "2000-01-01"
-      },
-      {
         "id": "5",
-        "task": "Id kontrol",
+        "task": "Complete your project until 4 January. Good Luck.",
         "status": false,
-        "deadline": "2001-08-03"
-      },
-      {
-        "id": "7",
-        "task": "id kontrol",
-        "status": false,
-        "deadline": "2000-04-04"
-      },
-      {
-        "id": "8",
-        "task": "id sort",
-        "status": false,
-        "deadline": "2000-05-05"
-      },
-      {
-        "id": "9",
-        "task": "cumartesi",
-        "status": false,
-        "deadline": "2000-07-01"
+        "deadline": "2024-01-04"
       }
     ]
   },
@@ -286,34 +226,16 @@
         "deadline": "2023-12-16"
       },
       {
-        "id": "3",
-        "task": "merhaba",
-        "status": false,
-        "deadline": "2000-01-01"
-      },
-      {
-        "id": "4",
-        "task": "Week 7- Odevlerini Tamamlayin",
-        "status": false,
-        "deadline": "2000-05-03"
-      },
-      {
         "id": "5",
-        "task": "Id kontrol",
+        "task": "Complete your project until 4 January. Good Luck.",
         "status": false,
-        "deadline": "2001-08-03"
+        "deadline": "2024-01-04"
       },
       {
-        "id": "7",
-        "task": "id kontrol",
+        "id": "6",
+        "task": "Test your code until Wednesday",
         "status": false,
-        "deadline": "2000-04-04"
-      },
-      {
-        "id": "9",
-        "task": "cumartesi",
-        "status": false,
-        "deadline": "2000-07-01"
+        "deadline": "2024-01-03"
       }
     ]
   },
@@ -364,34 +286,10 @@
         "deadline": "2023-12-31"
       },
       {
-        "id": "3",
-        "task": "merhaba",
-        "status": false,
-        "deadline": "2000-01-01"
-      },
-      {
-        "id": "4",
-        "task": "Week 7- Odevlerini Tamamlayin",
-        "status": false,
-        "deadline": "2000-05-03"
-      },
-      {
         "id": "5",
-        "task": "Id kontrol",
+        "task": "Complete your project until 4 January. Good Luck.",
         "status": false,
-        "deadline": "2001-08-03"
-      },
-      {
-        "id": "6",
-        "task": "deneme 102",
-        "status": false,
-        "deadline": "2000-03-03"
-      },
-      {
-        "id": "8",
-        "task": "id sort",
-        "status": false,
-        "deadline": "2000-05-05"
+        "deadline": "2024-01-04"
       }
     ]
   },
@@ -443,27 +341,9 @@
       },
       {
         "id": "5",
-        "task": "Id kontrol",
+        "task": "Complete your project until 4 January. Good Luck.",
         "status": false,
-        "deadline": "2001-08-03"
-      },
-      {
-        "id": "6",
-        "task": "deneme 102",
-        "status": false,
-        "deadline": "2000-03-03"
-      },
-      {
-        "id": "7",
-        "task": "id kontrol",
-        "status": false,
-        "deadline": "2000-04-04"
-      },
-      {
-        "id": "8",
-        "task": "id sort",
-        "status": false,
-        "deadline": "2000-05-05"
+        "deadline": "2024-01-04"
       }
     ]
   }

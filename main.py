@@ -1,14 +1,33 @@
 import sys
 import os
-from PyQt5.QtWidgets import QApplication, QMainWindow, QStackedWidget, QMessageBox, QWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QStackedWidget, QMessageBox, QWidget, QTableWidget, QTableWidgetItem, QCheckBox
+from PyQt5.QtCore import Qt
 from PyQt5.uic import loadUi
 import json
 import re
+from datetime import datetime
+from PyQt5.QtGui import QColor
 
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
 
 class Login(QMainWindow):
+    """
+    Class representing the login window of the application.
+
+    Attributes:
+    - signup_btn: Button for switching to the signup form.
+    - contact_adm_btn: Button for switching to the contact admin form.
+    - loginbutton: Button for initiating the login process.
+    - email_LE: Line edit for entering the email.
+    - password_LE: Line edit for entering the password.
+    """
+        
     def __init__(self):
+        """
+        Initializes the Login window.
+
+        Connects signals to corresponding slots and loads the UI from 'login.ui'.
+        """
         super(Login, self).__init__()
         loadUi('login.ui', self)
 
@@ -18,36 +37,60 @@ class Login(QMainWindow):
 
 
     def switch_signupform(self):
+        """
+        Switches to the signup form when the signup button is clicked.
+        Clears line edits in the signup form.
+        """
         stackedWidget.setCurrentIndex(1)
         signup.clear_line_edits_signupform()
 
     def switch_adminform(self):
+        """
+        Switches to the admin form when the contact admin button is clicked.
+        Clears line edits in the contact admin form.
+        """
         stackedWidget.setCurrentIndex(2)
         cont_admin.clear_line_edits_contactadmin()
     
     def switch_student(self):
+        """
+        Initiates the login process when the login button is clicked.
+
+        Retrieves email and password, checks against stored accounts, and switches to
+        corresponding user interfaces (Student, Teacher, Admin).
+        Displays error messages for incorrect credentials or file-related issues.
+        """
         email = self.email_LE.text()
         password = self.password_LE.text()
-        with open("accounts.json", "r") as userinfo:
-            accounts = json.load(userinfo)
+        try:
+            with open("accounts.json", "r") as userinfo:
+                accounts = json.load(userinfo)
 
-            if email in accounts:
-                if accounts[email]["password"] == password:
-                    if accounts[email]["Account_Type"] == "Student":
-                        stackedWidget.setCurrentIndex(3)
-                        student.resize(825, 600)
-                    elif accounts[email]["Account_Type"] == "Teacher":
-                        stackedWidget.setCurrentIndex(4)
-                        teacher.resize(825, 600)
-                    elif accounts[email]["Account_Type"] == "Admin":
-                        stackedWidget.setCurrentIndex(5)
-                        admin.resize(825, 600)
-                        admin.setFixedSize(825, 600)
+                if email in accounts:
+                    if accounts[email]["password"] == password:
+                        if accounts[email]["Account_Type"] == "Student":
+                            stackedWidget.setCurrentIndex(3)
+                            student.resize(825, 600)
+                        elif accounts[email]["Account_Type"] == "Teacher":
+                            stackedWidget.setCurrentIndex(4)
+                            teacher.resize(825, 600)
+                        elif accounts[email]["Account_Type"] == "Admin":
+                            stackedWidget.setCurrentIndex(5)
+                            admin.resize(825, 600)
+                            admin.setFixedSize(825, 600)
+                            admin.fill_table()
 
+                    else:
+                        self.show_error_message("The entered password is incorrect. Please verify and re-enter your password to proceed.")  # password is wrong
                 else:
-                    self.show_error_message("The entered password is incorrect. Please verify and re-enter your password to proceed.") #password is wrong
-            else:
-                self.show_error_message("The provided email does not exist in our records. If you need to create an account, please click on the 'Sign Up' button.")  #email doesn't exist
+                    self.show_error_message("The provided email does not exist in our records. If you need to create an account, please click on the 'Sign Up' button.")  # email doesn't exist
+
+        except FileNotFoundError:
+            self.show_error_message("The accounts file is not found. Please check if the file exists.")
+        except json.JSONDecodeError:
+            self.show_error_message("Error decoding JSON. Please check the file format.")
+        except Exception as e:
+            self.show_error_message(f"An unexpected error occurred: {str(e)}")
 
     def show_error_message(self, message): #error messages
         error_box = QMessageBox()
@@ -57,47 +100,95 @@ class Login(QMainWindow):
         error_box.exec_()
 
     def clear_line_edits_loginform(self):
+        """
+        Clears line edits in the login form.
+        """
         self.email_LE.clear()
         self.password_LE.clear()
 
 
 class Signup(QMainWindow):
+    """
+    Class representing the signup window of the application.
+
+    Attributes:
+    - sign_up_but: Button for initiating the signup process.
+    - Back_Log_but: Button for switching back to the login form.
+    - signup_email_LE: Line edit for entering the signup email.
+    - signup_password_LE: Line edit for entering the signup password.
+    - confirmpass_LE: Line edit for confirming the signup password.
+    - name_LE: Line edit for entering the user's name.
+    - surname_LE: Line edit for entering the user's surname.
+    """
     def __init__(self):
+        """
+        Initializes the Signup window.
+
+        Connects signals to corresponding slots and loads the UI from 'signup.ui'.
+        """
         super(Signup, self).__init__()
         loadUi('signup.ui', self)
         self.sign_up_but.clicked.connect(self.signup_swt_login)
         self.Back_Log_but.clicked.connect(self.switch_loginform)
 
     def signup_swt_login(self):
+        """
+        Initiates the signup process when the signup button is clicked.
+
+        Retrieves user input, checks for existing email, password matching,
+        and password strength. If all conditions are met, adds the new account
+        to the 'accounts.json' file and switches to the login form.
+        """
         email = self.signup_email_LE.text()
         password = self.signup_password_LE.text()
         password_conf= self.confirmpass_LE.text()
         good_to_go=False
-        with open("accounts.json", "r") as userinfo:
-            accounts = json.load(userinfo)
-            if email in accounts:
-                self.show_error_message("The email address provided already exists in our records. If you have an existing account, please proceed to the login page.")  #email exists. if you have an account go to login page.
-            elif password!=password_conf:
-                self.show_error_message("The passwords entered do not match. Please ensure that the passwords are identical and try again.")
-            elif self.password_strength(password)==False:
-                 self.show_error_message("Please use at least 2 uppercase, 2 lowercase, and 2 special characters. Minimum length is 8 characters.")
-            else: 
-                accounts[email] = {
-                    "password": password,
-                    "Account_Type": "Student", 
-                    "name": self.name_LE.text(),
-                    "surname": self.surname_LE.text()
-                }
-                good_to_go=True
+        try:
+            with open("accounts.json", "r") as userinfo:
+                accounts = json.load(userinfo)
+
+                if email in accounts:
+                    self.show_error_message("The email address provided already exists in our records. If you have an existing account, please proceed to the login page.")  # email exists. if you have an account go to login page.
+                elif password != password_conf:
+                    self.show_error_message("The passwords entered do not match. Please ensure that the passwords are identical and try again.")
+                elif not self.password_strength(password):
+                    self.show_error_message("Please use at least 2 uppercase, 2 lowercase, and 2 special characters. Minimum length is 8 characters.")
+                else:
+                    accounts[email] = {
+                        "password": password,
+                        "Account_Type": "Student",
+                        "name": self.name_LE.text(),
+                        "surname": self.surname_LE.text(),
+                        "Email": email,
+                        "Gender": "",
+                        "DoB": "",
+                        "Phone": ""
+                    }
+                    good_to_go = True
+
+        except FileNotFoundError:
+            self.show_error_message("The accounts file is not found. Please check if the file exists.")
+        except json.JSONDecodeError:
+            self.show_error_message("Error decoding JSON. Please check the file format.")
+        except Exception as e:
+            self.show_error_message(f"An unexpected error occurred: {str(e)}")
+
                                             
         if good_to_go:
-            with open("accounts.json", "w") as userinfo:
-                json.dump(accounts, userinfo, indent=2)        
-            stackedWidget.setCurrentIndex(0)
-        login.clear_line_edits_loginform()
+            try:
+                with open("accounts.json", "w") as userinfo:
+                    json.dump(accounts, userinfo, indent=2)
+                stackedWidget.setCurrentIndex(0)
+                login.clear_line_edits_loginform()
+            except Exception as e:
+                self.show_error_message(f"An unexpected error occurred while saving the account information: {str(e)}")
 
 
     def switch_loginform(self):
+        """
+        Switches back to the login form when the 'Back to Login' button is clicked.
+        Clears line edits in the login form.
+        """
         stackedWidget.setCurrentIndex(0)
         login.clear_line_edits_loginform()
 
@@ -110,6 +201,15 @@ class Signup(QMainWindow):
         error_box.exec_()
     
     def password_strength(self, psword):
+        """
+        Checks the strength of the password.
+
+        Args:
+        - psword: The password to be checked.
+
+        Returns:
+        - True if the password meets strength requirements, False otherwise.
+        """
         if len(psword) < 8:
             return False
 
@@ -131,6 +231,9 @@ class Signup(QMainWindow):
         return True
     
     def clear_line_edits_signupform(self):
+        """
+        Clears line edits in the signup form.
+        """
         self.signup_email_LE.clear()
         self.signup_password_LE.clear()
         self.confirmpass_LE.clear()
@@ -138,13 +241,34 @@ class Signup(QMainWindow):
         self.surname_LE.clear()
     
 class ContactAdmin(QMainWindow):
+    """
+    Class representing the contact admin window of the application.
+
+    Attributes:
+    - Back_to_login_but: Button for switching back to the login form.
+    - Create_TA_but: Button for creating a TA (Teacher Assistant) account.
+    - TA_email_LE: Line edit for entering the TA's email.
+    - TA_password_LE: Line edit for entering the TA's password.
+    - TA_confirmpass_LE: Line edit for confirming the TA's password.
+    - TA_name_LE: Line edit for entering the TA's name.
+    - TA_surname_LE: Line edit for entering the TA's surname.
+    """
     def __init__(self):
+        """
+        Initializes the ContactAdmin window.
+
+        Connects signals to corresponding slots and loads the UI from 'contactadmin.ui'.
+        """
         super(ContactAdmin, self).__init__()
         loadUi('contactadmin.ui', self)
         self.Back_to_login_but.clicked.connect(self.switch_loginform)
         self.Create_TA_but.clicked.connect(self.send_TA_Account)
 
     def switch_loginform(self):
+        """
+        Switches back to the login form when the 'Back to Login' button is clicked.
+        Clears line edits in the login form.
+        """
         stackedWidget.setCurrentIndex(0)
         login.clear_line_edits_loginform()
 
@@ -178,36 +302,65 @@ class ContactAdmin(QMainWindow):
         error_box.exec_()
 
     def send_TA_Account(self):
+        """
+        Sends a request to create a Teacher Assistant (TA) account.
+
+        Retrieves user input, checks for existing requests, existing accounts,
+        password matching, and password strength. If all conditions are met,
+        adds the new TA account request to the 'TA_tobecreated.json' file.
+        """
         email = self.TA_email_LE.text()
         password = self.TA_password_LE.text()
         password_conf= self.TA_confirmpass_LE.text()
         good_to_go=False
-        pendinginfo= open("TA_tobecreated.json","r")
-        pending_accounts=json.load(pendinginfo)
-        if email in pending_accounts:
-            self.show_error_message("You have already applied for creating an account. Admin will create your account in 24 hours")  #Pending account.
-            pendinginfo.close()
-        else:
-            with open("accounts.json", "r") as userinfo:
-                accounts = json.load(userinfo)
-                if email in accounts:
-                    self.show_error_message("The email address provided already exists in our records. If you have an existing account, please proceed to the login page.")  #email exists. if you have an account go to login page.
-                elif password!=password_conf:
-                    self.show_error_message("The passwords entered do not match. Please ensure that the passwords are identical and try again.")
-                elif self.password_strength(password)==False:
-                    self.show_error_message("Please use at least 2 uppercase, 2 lowercase, and 2 special characters. Minimum length is 8 characters.")
-                else: 
-                    pending_accounts[email] = {
-                        "password": password,
-                        "Account_Type": "Teacher", 
-                        "name": self.TA_name_LE.text(),
-                        "surname": self.TA_surname_LE.text()
-                    }
-                    with open("TA_tobecreated.json", "w") as pendinginfo:
-                        json.dump(pending_accounts, pendinginfo, indent=2)        
-                    stackedWidget.setCurrentIndex(0)
+        try:
+            with open("TA_tobecreated.json", "r") as pendinginfo:
+                pending_accounts = json.load(pendinginfo)
+
+            if email in pending_accounts:
+                self.show_error_message("You have already applied for creating an account. Admin will create your account in 24 hours")  # Pending account.
+            else:
+                try:
+                    with open("accounts.json", "r") as userinfo:
+                        accounts = json.load(userinfo)
+
+                    if email in accounts:
+                        self.show_error_message("The email address provided already exists in our records. If you have an existing account, please proceed to the login page.")  # email exists. if you have an account go to login page.
+                    elif password != password_conf:
+                        self.show_error_message("The passwords entered do not match. Please ensure that the passwords are identical and try again.")
+                    elif not self.password_strength(password):
+                        self.show_error_message("Please use at least 2 uppercase, 2 lowercase, and 2 special characters. Minimum length is 8 characters.")
+                    else:
+                        pending_accounts[email] = {
+                            "password": password,
+                            "Account_Type": "Teacher",
+                            "name": self.TA_name_LE.text(),
+                            "surname": self.TA_surname_LE.text()
+                        }
+
+                        with open("TA_tobecreated.json", "w") as pendinginfo:
+                            json.dump(pending_accounts, pendinginfo, indent=2)
+
+                        stackedWidget.setCurrentIndex(0)
+
+                except FileNotFoundError:
+                    self.show_error_message("The accounts file is not found. Please check if the file exists.")
+                except json.JSONDecodeError:
+                    self.show_error_message("Error decoding JSON. Please check the file format.")
+                except Exception as e:
+                    self.show_error_message(f"An unexpected error occurred while processing the accounts file: {str(e)}")
+
+        except FileNotFoundError:
+            self.show_error_message("The pending accounts file is not found. Please check if the file exists.")
+        except json.JSONDecodeError:
+            self.show_error_message("Error decoding JSON. Please check the file format.")
+        except Exception as e:
+            self.show_error_message(f"An unexpected error occurred while processing the pending accounts file: {str(e)}")
 
     def clear_line_edits_contactadmin(self):
+        """
+        Clears line edits in the contact admin form.
+        """
         self.TA_email_LE.clear()
         self.TA_password_LE.clear()
         self.TA_confirmpass_LE.clear()
@@ -222,6 +375,7 @@ class Student(QMainWindow):
         loadUi('student.ui', self)
         self.Back_Log_but.clicked.connect(self.switch_loginform)
 
+
     def switch_loginform(self):
         stackedWidget.setCurrentIndex(0)
 
@@ -230,28 +384,391 @@ class Teacher(QMainWindow):
         super(Teacher, self).__init__()
         loadUi('teacher.ui', self)
         self.Back_Log_but.clicked.connect(self.switch_loginform)
+        self.Chatboard_but.clicked.connect(self.switch_chatboard)
         
     def switch_loginform(self):
         stackedWidget.setCurrentIndex(0)
-        login.resize(450, 600)
+    
+    def switch_chatboard(self):
+        stackedWidget.setCurrentIndex(6)
+        chatboard.fill_user_list2()
 
 class Admin(QMainWindow):
+    """
+    Class representing the admin window of the application.
+
+    Attributes:
+    - Back_Log_but: Button for switching back to the login form.
+    - Approve_but: Button for approving selected accounts.
+    - Discard_but: Button for discarding selected accounts.
+    - tableWidget: Table widget for displaying pending TA accounts.
+    """
     def __init__(self):
+        """
+        Initializes the Admin window.
+
+        Connects signals to corresponding slots, sets up the table, and fills it with data.
+        """
         super(Admin, self).__init__()
         loadUi('admin.ui', self)
 
         self.Back_Log_but.clicked.connect(self.switch_loginform)
-        self.tableWidget.setColumnWidth(0,250)
+        self.Approve_but.clicked.connect(self.approve_account)
+        self.Discard_but.clicked.connect(self.discard_account)
+        self.tableWidget.setColumnWidth(0,50)
         self.tableWidget.setColumnWidth(1,150)
         self.tableWidget.setColumnWidth(2,150)
-        
+        self.tableWidget.setColumnCount(4)
+        self.tableWidget.setHorizontalHeaderLabels([ "Select", "Email", "Name", "Surname"])
+        self.fill_table()
+
+
+    def fill_table(self):
+       """
+        Fills the table with pending TA account data.
+        """
+       try:
+          with open("TA_tobecreated.json", "r") as pendinginfo:
+                pending_accounts = json.load(pendinginfo)
+                row = 0
+                self.tableWidget.setRowCount(len(pending_accounts))
+                for emails in pending_accounts:
+                    checkbox = QCheckBox()
+                    self.tableWidget.setCellWidget(row, 0, checkbox)
+                    self.tableWidget.setItem(row, 1, QTableWidgetItem(emails))
+                    self.tableWidget.setItem(row, 2, QTableWidgetItem(pending_accounts[emails]["name"]))
+                    self.tableWidget.setItem(row, 3, QTableWidgetItem(pending_accounts[emails]["surname"]))
+
+                    row += 1
+       except Exception as e:
+           print(f"Error loading data: {e}")
+
+
+    def approve_account(self):
+        """
+        Approves selected accounts and updates the tables accordingly.
+        """
+        pendinginfo = open("TA_tobecreated.json", "r")
+        pending_accounts = json.load(pendinginfo)
+        userinfo = open("accounts.json", "r")
+        accounts = json.load(userinfo)
+        pending_accounts_rest=dict()
+        for row in range(self.tableWidget.rowCount()):
+            checkbox = self.tableWidget.cellWidget(row, 0)
+            email_item = self.tableWidget.item(row, 1)
+            email_key = email_item.text() if email_item else None
+            if checkbox.isChecked():
+                if email_key in pending_accounts:
+                    accounts[email_key] = {
+                        "password": pending_accounts[email_key]["password"],
+                        "Account_Type": "Teacher",
+                        "name": pending_accounts[email_key]["name"],
+                        "surname": pending_accounts[email_key]["surname"]
+                    }
+            else:
+                pending_accounts_rest[email_key] = {
+                    "password": pending_accounts[email_key]["password"],
+                    "Account_Type": "Teacher",
+                    "name": pending_accounts[email_key]["name"],
+                    "surname": pending_accounts[email_key]["surname"]
+                 }
+
+                
+        pendinginfo.close()
+        userinfo.close()
+        with open("accounts.json", "w") as userinfo:
+                json.dump(accounts, userinfo, indent=2)
+        with open("TA_tobecreated.json", "w") as pendinginfo:
+                json.dump(pending_accounts_rest, pendinginfo, indent=2)
+        self.tableWidget.clearContents()
+        self.tableWidget.setRowCount(len(pending_accounts_rest))
+        row = 0
+        for emails in pending_accounts_rest:
+            checkbox = QCheckBox()
+            self.tableWidget.setCellWidget(row, 0, checkbox)
+            self.tableWidget.setItem(row, 1, QTableWidgetItem(emails))
+            self.tableWidget.setItem(row, 2, QTableWidgetItem(pending_accounts_rest[emails]["name"]))
+            self.tableWidget.setItem(row, 3, QTableWidgetItem(pending_accounts_rest[emails]["surname"]))
+            row += 1            
+
+    def discard_account(self):
+        """
+        Discards selected accounts and updates the tables accordingly.
+        """
+        pendinginfo = open("TA_tobecreated.json", "r")
+        pending_accounts = json.load(pendinginfo)
+        pending_accounts_rest=dict()
+        for row in range(self.tableWidget.rowCount()):
+            checkbox = self.tableWidget.cellWidget(row, 0)
+            email_item = self.tableWidget.item(row, 1)
+            email_key = email_item.text() if email_item else None
+            if not checkbox.isChecked():
+                if email_key in pending_accounts:
+                    pending_accounts_rest[email_key] = {
+                        "password": pending_accounts[email_key]["password"],
+                        "Account_Type": "Teacher",
+                        "name": pending_accounts[email_key]["name"],
+                        "surname": pending_accounts[email_key]["surname"]
+                    }
+             
+        pendinginfo.close()
+        with open("TA_tobecreated.json", "w") as pendinginfo:
+                json.dump(pending_accounts_rest, pendinginfo, indent=2)
+        self.tableWidget.clearContents()
+        self.tableWidget.setRowCount(len(pending_accounts_rest))
+        row = 0
+        for emails in pending_accounts_rest:
+            checkbox = QCheckBox()
+            self.tableWidget.setCellWidget(row, 0, checkbox)
+            self.tableWidget.setItem(row, 1, QTableWidgetItem(emails))
+            self.tableWidget.setItem(row, 2, QTableWidgetItem(pending_accounts_rest[emails]["name"]))
+            self.tableWidget.setItem(row, 3, QTableWidgetItem(pending_accounts_rest[emails]["surname"]))
+            row += 1   
+
     def switch_loginform(self):
         stackedWidget.setCurrentIndex(0)
-        login.resize(450, 600)
-        login.setFixedSize(450, 600)
     
-    def loaddata(self):
-        pass
+class Chatboard(QMainWindow):
+    """
+    Class representing the chatboard window of the application.
+
+    Attributes:
+    - Back_TF_but: Button for switching back to the teacher form.
+    - Send_but: Button for sending a message.
+    - usertableWidget: Table widget for displaying user information.
+    - history_LE: Line edit for displaying chat history.
+    - send_TE: Text edit for typing and sending messages.
+    """
+    def __init__(self):
+        """
+        Initializes the Chatboard window.
+
+        Connects signals to corresponding slots, sets up the user table, and initializes UI elements.
+        """
+        super(Chatboard, self).__init__()
+        loadUi('chatbot.ui', self)
+        # self.usertableWidget.setColumnWidth(0,10)
+        self.usertableWidget.setColumnWidth(0,400)
+        # self.usertableWidget.setColumnCount(2)
+        # self.usertableWidget.setHorizontalHeaderLabels([ "","Name"])
+        self.usertableWidget.setColumnCount(2)
+        self.usertableWidget.setHorizontalHeaderLabels(["Name","Email"])
+        # self.fill_user_list2()
+        self.Back_TF_but.clicked.connect(self.switch_teacherform)
+        self.Send_but.clicked.connect(self.send_message)
+        self.usertableWidget.itemSelectionChanged.connect(self.selection)
+        self.history_LE.setReadOnly(True)
+
+
+    def fill_user_list2(self):
+        """
+        Fills the user table with user information and unread message counts.
+        """
+        try:
+            with open("chats.json", "r") as chatinfo:
+                chat_entries = json.load(chatinfo)
+        except Exception as e:
+            print(f"Error loading data: {e}")
+            return
+        
+        try:
+            with open("accounts.json", "r") as userinfo:
+                user_accounts = json.load(userinfo)
+        except Exception as e:
+            print(f"Error loading data: {e}")
+            return
+
+        unread_list=dict()
+
+        user_email = login.email_LE.text()
+
+
+        try:
+            for i in user_accounts:
+                unread_count = 0
+                msg_count = 1
+                if i not in chat_entries[user_email]:
+                    unread_list[i] = 0
+                else:
+                    for j in chat_entries[user_email][i]:
+                        messageid = "message" + str(msg_count)
+                        if (
+                            messageid in chat_entries[user_email][i]
+                            and chat_entries[user_email][i][messageid]["read"] == 0
+                            and chat_entries[user_email][i][messageid]["Status"] == "Received"
+                        ):
+                            unread_count += 1
+                        msg_count += 1
+                    unread_list[i] = unread_count
+        except Exception as e:
+            print(f"Error loading data: {e}")
+        
+        row = 0
+        self.usertableWidget.setRowCount(len(user_accounts))
+        self.usertableWidget.setColumnWidth(0, 185)
+        self.usertableWidget.setColumnWidth(1, 0)
+        for email, data in user_accounts.items():
+            if unread_list[email] > 0:
+                self.usertableWidget.setItem(
+                    row,
+                    0,
+                    QTableWidgetItem(data["surname"] + ", " + data["name"] + " (" + str(unread_list[email]) + ")"),
+                )
+                self.usertableWidget.item(row, 0).setBackground(QColor(255, 0, 0))
+            else:
+                self.usertableWidget.setItem(row, 0, QTableWidgetItem(data["surname"] + ", " + data["name"]))
+            self.usertableWidget.setItem(row, 1, QTableWidgetItem(email))
+            row += 1
+
+
+
+
+    def selection(self):
+        """
+        Handles user selection from the user table and displays the chat history.
+        """
+        selected_items = self.usertableWidget.selectedItems()
+
+        if not selected_items:
+            return
+        selected_row=selected_items[0].row()
+        recipient=self.usertableWidget.item(selected_row,1).text()
+
+        user_email = login.email_LE.text()
+
+
+        with open("accounts.json", "r") as userinfo:
+            accounts=json.load(userinfo)
+            name_of_sender=accounts[user_email]["name"]
+            name_of_recepient=accounts[recipient]["name"]
+
+        with open("chats.json", "r") as chatinfo:
+            chat_entries=json.load(chatinfo)
+
+            # Check if user_email and recipient exist in chat_entries
+        if user_email not in chat_entries or recipient not in chat_entries[user_email]:
+            if hasattr(self, 'history_LE'):
+                self.history_LE.setText("")
+            return
+
+
+        for key in chat_entries[user_email][recipient]:
+            inner_dict = chat_entries[user_email][recipient][key]
+            inner_dict["read"]=1
+
+        with open("chats.json", "w") as chatinfo:
+            json.dump(chat_entries, chatinfo, indent=2)
+        
+
+        count=0
+
+        chat_recipient = chat_entries[user_email].get(recipient, {})
+
+        if not chat_recipient:
+            if hasattr(self, 'history_LE'):
+                self.history_LE.setText("")
+            return
+
+        for i in chat_entries[user_email][recipient]:
+            if count==0:
+                time1=chat_entries[user_email][recipient][i]["Time"]
+                sender=chat_entries[user_email][recipient][i]["Status"]
+                message=chat_entries[user_email][recipient][i]["Message"]
+                formatted_date1 = datetime.fromtimestamp(time1).strftime("%A, %B %d")
+                formatted_time=datetime.fromtimestamp(time1).strftime("%H:%M")
+                padding = "-" * ((50 - len(formatted_date1)) // 2)
+                if hasattr(self, 'history_LE'):
+                    self.history_LE.setText(padding + formatted_date1 + padding + "\n")
+                    if sender == "Sent":
+                        self.history_LE.append("you : " + formatted_time + "\n" + message + "\n")
+                    else:
+                        self.history_LE.insertPlainText(name_of_recepient+ " : " + formatted_time + "\n" + message + "\n")
+
+                count+=1
+            else:
+                time2=chat_entries[user_email][recipient][i]["Time"]
+                sender=chat_entries[user_email][recipient][i]["Status"]
+                message=chat_entries[user_email][recipient][i]["Message"]
+                formatted_date2 = datetime.fromtimestamp(time2).strftime("%A, %B %d")
+                formatted_time=datetime.fromtimestamp(time2).strftime("%H:%M")
+                if formatted_date1==formatted_date2:
+                    if sender=="Sent":
+                        self.history_LE.append("you : " + formatted_time + "\n" + message+"\n")
+
+                    else:
+                        self.history_LE.append(name_of_recepient + " : " + formatted_time + "\n" + message+"\n")
+
+                else:
+                    padding = "-" * ((50 - len(formatted_date2)) // 2)
+
+                    self.history_LE.append(padding + formatted_date2 + padding+"\n")
+                    if sender=="Sent":
+                        self.history_LE.append("you : " + formatted_time + "\n" + message+"\n")
+
+                    else:
+                        self.history_LE.append(name_of_recepient + " : " + formatted_time + "\n" + message+"\n")
+
+                count+=1
+                formatted_date1=formatted_date2        
+
+        count=0
+        self.fill_user_list2()
+
+
+    
+    def send_message(self):
+        """
+        Sends a message to the selected recipient and updates the chat entries.
+        """
+        message=self.send_TE.toPlainText()
+        # user_email=login.email_LE.text()
+        selected_items = self.usertableWidget.selectedItems()
+        user_email = login.email_LE.text()
+
+        if not selected_items:
+            return
+        
+        selected_row=selected_items[0].row()
+        recipient=self.usertableWidget.item(selected_row,1).text()
+        
+        with open("chats.json", "r") as chat_file:
+            chat_entries = json.load(chat_file)
+        
+        if user_email not in chat_entries:
+            chat_entries[user_email] = {}
+        
+        chat_entries.setdefault(user_email, {})
+        chat_entries.setdefault(recipient, {})
+        
+        time=datetime.now().timestamp()
+        new_message_key_user = f"message{len(chat_entries[user_email].get(recipient, {})) + 1}"
+        new_message_key_recipient = f"message{len(chat_entries[recipient].get(user_email, {})) + 1}"
+        # new_message_key = f"message{len(chat_entries[user_email][recipient]) + 1}"
+
+        chat_entries[user_email].setdefault(recipient, {})[new_message_key_user] = {
+        "Time": time,
+        "Status": "Sent",
+        "read": 1,
+        "Message": message
+        }
+
+        chat_entries[recipient].setdefault(user_email, {})[new_message_key_recipient] = {
+        "Time": time,
+        "Status": "Received",
+        "read": 0,
+        "Message": message
+        }
+
+        with open("chats.json", "w") as chat_file:
+            json.dump(chat_entries, chat_file, indent=2) 
+        
+        self.send_TE.setText("")
+        self.selection()
+
+        
+    def switch_teacherform(self):
+        stackedWidget.setCurrentIndex(4)
+
 
 
 
@@ -266,14 +783,17 @@ if __name__ == '__main__':
     student=Student()
     teacher=Teacher()
     admin=Admin()
+    chatboard=Chatboard()
 
 
 
-    login.setFixedSize(450, 600)  
-    signup.setFixedSize(450, 600)
-    cont_admin.setFixedSize(450, 600)
-    student.setFixedSize(450, 600)
-    teacher.setFixedSize(450, 600)
+    login.setFixedSize(900, 600)  
+    signup.setFixedSize(900, 600)
+    cont_admin.setFixedSize(900, 600)
+    student.setFixedSize(900, 600)
+    teacher.setFixedSize(900, 600)
+    admin.setFixedSize(900, 600)
+    chatboard.setFixedSize(900, 600)
 
 
 
@@ -285,7 +805,9 @@ if __name__ == '__main__':
     stackedWidget.addWidget(student)
     stackedWidget.addWidget(teacher)
     stackedWidget.addWidget(admin)
+    stackedWidget.addWidget(chatboard)
 
 
     stackedWidget.show()
     sys.exit(app.exec_())
+

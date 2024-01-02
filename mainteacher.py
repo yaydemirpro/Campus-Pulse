@@ -166,10 +166,10 @@ class MyMainWindow(QMainWindow):
         self.populate_mentor_attendance_table()
         self.connect_table_signals() 
         self.check_user_account_type()
-        
-        #self.pushButton_chatbox.clicked.connect(Main.switch_chatboard(self))
-   
-        #self.pushButton_backtologin.clicked.connect(main.Main_Window.switch_loginform(self))
+    
+        self.pushButton_chatbox.clicked.connect(main.admin.switch_chatboard)
+        self.pushButton_profile.clicked.connect(main.student.switch_userprofile)
+        self.pushButton_backtologin.clicked.connect(main.student.switch_loginform)
         self.pushButton_schedule.clicked.connect(lambda: self.MainPage.setCurrentIndex(1))
         self.pushButton_announcement.clicked.connect(lambda: self.MainPage.setCurrentIndex(1))
 
@@ -512,8 +512,7 @@ class MyMainWindow(QMainWindow):
 if __name__ == "__main__":
     app = QApplication([])
     window = MyMainWindow()
-    Main= main.Main_Window()
-    main_chat= main.Chatboard()
+
    # window.set( 900, 600 )
     window.show()
     app.exec_()

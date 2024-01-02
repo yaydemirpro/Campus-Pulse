@@ -102,6 +102,12 @@
         "task": "Deneme2",
         "status": false,
         "deadline": "2024-01-24"
+      },
+      {
+        "id": "8",
+        "task": "New Task",
+        "status": false,
+        "deadline": "2024-01-10"
       }
     ]
   }

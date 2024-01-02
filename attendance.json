@@ -34,5 +34,18 @@
       "2023-01-03": "Attend",
       "2024-02-15": "Attend"
     }
+  },
+  "murat@gmail.com": {
+    "Mentor Meeting": {
+      "2024-01-24": "Not Attended"
+    },
+    "Data Science": {
+      "2024-01-23": "Not Attended"
+    }
+  },
+  "serkan@gmail.com": {
+    "Data Science": {
+      "2024-01-23": "Not Attended"
+    }
   }
 }

@@ -167,9 +167,9 @@ class MyMainWindow(QMainWindow):
         self.connect_table_signals() 
         self.check_user_account_type()
     
-        self.pushButton_chatbox.clicked.connect(Main_Window().switch_chatboard)
-        self.pushButton_profile.clicked.connect(Main_Window().switch_userprofile)
-        self.pushButton_backtologin.clicked.connect(Main_Window().switch_login)
+        self.pushButton_chatbox.clicked.connect(self.switch_chatboard)
+        # self.pushButton_profile.clicked.connect(Main_Window().switch_userprofile)
+        # self.pushButton_backtologin.clicked.connect(Main_Window().switch_login)
         self.pushButton_schedule.clicked.connect(lambda: self.MainPage.setCurrentIndex(1))
         self.pushButton_announcement.clicked.connect(lambda: self.MainPage.setCurrentIndex(1))
 
@@ -197,6 +197,9 @@ class MyMainWindow(QMainWindow):
         self.timer.timeout.connect(self.update_announcements)
         self.timer.start(5000)  # 5 saniyede bir kontrol et
         self.update_announcements()  # Başlangıçta da çalıştır
+
+    def switch_to_chatboard(self):
+        stackedWidget.setCurrentIndex(6)
 
     def check_user_account_type(self):
         # Kullanıcının account type'ını kontrol edin

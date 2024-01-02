@@ -1066,7 +1066,7 @@ class Main_Window(QMainWindow):
         # QTimer oluştur
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.update_announcements)
-        self.timer.start(1500)  # 5 saniyede bir kontrol et
+        self.timer.start(1500)  # 5 saniyede bir kontrol et     
         self.update_announcements()  # Başlangıçta da çalıştır
 
     def update_announcements(self):

@@ -140,14 +140,13 @@ class TaskManager:
         with open('attendance.json', 'w') as f:
             json.dump(self.attendance_data, f, indent=2)
 
-    def switch_chatboard(self):
-        main.stackedWidget.setCurrentIndex(6)
-        
-        main.chatboard.fill_user_list2()
+    #def switch_chatboard(self):
+    #    stackedWidget.setCurrentIndex(6)       
+    #    main.chatboard.fill_user_list2()
 
-    def switch_login(self):
-        main.stackedWidget.setCurrentIndex(0)
-        main.login.clear_line_edits_loginform()
+    #def switch_login(self):
+    #    main.stackedWidget.setCurrentIndex(0)
+    #    main.login.clear_line_edits_loginform()
 
 
 # PyQt5 UI sınıfını ornekleme
@@ -168,7 +167,7 @@ class MyMainWindow(QMainWindow):
         self.connect_table_signals() 
         self.check_user_account_type()
         
-        self.pushButton_chatbox.clicked.connect(lambda: self.task_manager.switch_chatboard())
+        self.pushButton_chatbox.clicked.connect(Main.switch_chatboard(self))
    
         #self.pushButton_backtologin.clicked.connect(main.Main_Window.switch_loginform(self))
         self.pushButton_schedule.clicked.connect(lambda: self.MainPage.setCurrentIndex(1))

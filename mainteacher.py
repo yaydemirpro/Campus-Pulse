@@ -167,7 +167,7 @@ class MyMainWindow(QMainWindow):
         self.connect_table_signals() 
         self.check_user_account_type()
         
-        self.pushButton_chatbox.clicked.connect(Main.switch_chatboard(self))
+        #self.pushButton_chatbox.clicked.connect(Main.switch_chatboard(self))
    
         #self.pushButton_backtologin.clicked.connect(main.Main_Window.switch_loginform(self))
         self.pushButton_schedule.clicked.connect(lambda: self.MainPage.setCurrentIndex(1))

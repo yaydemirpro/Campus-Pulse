@@ -48,6 +48,12 @@
         "Status": "Received",
         "read": 1,
         "Message": "Nas\u0131ls\u0131n\u0131z"
+      },
+      "message3": {
+        "Time": 1704225215.902655,
+        "Status": "Received",
+        "read": 1,
+        "Message": "Merhaba hocam nasilsiniz"
       }
     },
     "murat@gmail.com": {
@@ -56,6 +62,12 @@
         "Status": "Sent",
         "read": 1,
         "Message": "Merhabalar"
+      },
+      "message2": {
+        "Time": 1704225277.983465,
+        "Status": "Sent",
+        "read": 1,
+        "Message": "hello how are you\n"
       }
     },
     "yusuf@gmail.com": {
@@ -68,7 +80,7 @@
       "message2": {
         "Time": 1704133229.079366,
         "Status": "Received",
-        "read": 0,
+        "read": 1,
         "Message": "Merhabalar"
       }
     }
@@ -90,6 +102,12 @@
         "Status": "Received",
         "read": 0,
         "Message": "Merhabalar"
+      },
+      "message2": {
+        "Time": 1704225277.983465,
+        "Status": "Received",
+        "read": 0,
+        "Message": "hello how are you\n"
       }
     }
   }

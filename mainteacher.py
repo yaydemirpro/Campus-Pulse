@@ -5,7 +5,7 @@ from datetime import datetime
 import json
 #from Ui_teacher_page import Ui_MainWindow
 from PyQt5.uic import loadUi
-import main
+from main import Main_Window
 
 class TaskManager:
     def __init__(self):
@@ -167,9 +167,9 @@ class MyMainWindow(QMainWindow):
         self.connect_table_signals() 
         self.check_user_account_type()
     
-        self.pushButton_chatbox.clicked.connect(main.admin.switch_chatboard)
-        self.pushButton_profile.clicked.connect(main.student.switch_userprofile)
-        self.pushButton_backtologin.clicked.connect(main.student.switch_loginform)
+        self.pushButton_chatbox.clicked.connect(Main_Window().switch_chatboard)
+        self.pushButton_profile.clicked.connect(Main_Window().switch_userprofile)
+        self.pushButton_backtologin.clicked.connect(Main_Window().switch_login)
         self.pushButton_schedule.clicked.connect(lambda: self.MainPage.setCurrentIndex(1))
         self.pushButton_announcement.clicked.connect(lambda: self.MainPage.setCurrentIndex(1))
 

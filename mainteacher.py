@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QTableWidget, QApplication, QMainWindow, QMessageBox
 from PyQt5.QtCore import QTimer, Qt
 from datetime import datetime
 import json
-from Ui_teacher_page import Ui_MainWindow
+#from Ui_teacher_page import Ui_MainWindow
 from PyQt5.uic import loadUi
 import main
 
@@ -142,6 +142,7 @@ class TaskManager:
 
     def switch_chatboard(self):
         main.stackedWidget.setCurrentIndex(6)
+        
         main.chatboard.fill_user_list2()
 
     def switch_login(self):
@@ -155,6 +156,9 @@ class MyMainWindow(QMainWindow):
         super(MyMainWindow, self).__init__()
         #self.setupUi(self)
         loadUi("teacher_page.ui", self)
+        self.setWindowTitle('Campus Pulse')
+        
+
         self.task_manager = TaskManager()
         self.populate_students_list()
         self.populate_todo_list()
@@ -162,7 +166,14 @@ class MyMainWindow(QMainWindow):
         self.populate_attendance_table()
         self.populate_mentor_attendance_table()
         self.connect_table_signals() 
+        self.check_user_account_type()
         
+        self.pushButton_chatbox.clicked.connect(lambda: self.task_manager.switch_chatboard())
+   
+        #self.pushButton_backtologin.clicked.connect(main.Main_Window.switch_loginform(self))
+        self.pushButton_schedule.clicked.connect(lambda: self.MainPage.setCurrentIndex(1))
+        self.pushButton_announcement.clicked.connect(lambda: self.MainPage.setCurrentIndex(1))
+
         self.pushButton_SchSave.clicked.connect(self.save_attendance)
         self.tableWidget_Students.setColumnWidth(0,100)
         self.tableWidget_Students.setColumnWidth(1,150)
@@ -172,6 +183,7 @@ class MyMainWindow(QMainWindow):
         self.tableWidget_ToDoList.setColumnWidth(0, 50)  # 0. sütunun genişliği
         self.tableWidget_ToDoList.setColumnWidth(1, 635)  # 1. sütunun genişliği
         self.tableWidget_ToDoList.setColumnWidth(2, 150)
+        
         # Create Task butonuna tıklandığında
         self.pushButton_CreateTask.clicked.connect(self.create_task)
 
@@ -187,6 +199,14 @@ class MyMainWindow(QMainWindow):
         self.timer.start(5000)  # 5 saniyede bir kontrol et
         self.update_announcements()  # Başlangıçta da çalıştır
 
+    def check_user_account_type(self):
+        # Kullanıcının account type'ını kontrol edin
+        account_type = "admin"  # Burada kullanıcının gerçek account type'ını almalısınız
+        if account_type == "admin":
+            self.pushButton_switchadmin.show()
+        else:
+            self.pushButton_switchadmin.hide()
+            
     def populate_attendance_table(self):
         # Get students and dates from your data
         students = self.task_manager.get_students()
@@ -270,7 +290,7 @@ class MyMainWindow(QMainWindow):
                     if date in self.task_manager.attendance_data[email][meeting_type]:
                         return self.task_manager.attendance_data[email][meeting_type][date]
 
-            return "N/A"
+            return "-"
 
 
 
@@ -292,7 +312,7 @@ class MyMainWindow(QMainWindow):
             if last_date >= current_date:
                 self.textEdit_AnnouncementView.clear()
                 self.textEdit_AnnouncementView.append(
-                    f"📢 {announcement['content']} ")
+                    f"📢❗🚨   {announcement['content']}   🚨❗📢")
 
             # Bir sonraki anonsa geç
             self.announcement_index += 1
@@ -318,6 +338,10 @@ class MyMainWindow(QMainWindow):
 
         # Seçilen öğrenci e-postalarını al
         selected_items = self.listWidget_AssignList.selectedItems()
+        if not selected_items:
+            QMessageBox.warning(self, "Warning", "Please select at least one student.")
+            return        
+        
         assigned_emails = [item.text().split("(")[-1].split(")")[0] for item in selected_items]
 
         # Görev yöneticisine görev oluşturma işlemini yapması için bildir
@@ -333,6 +357,10 @@ class MyMainWindow(QMainWindow):
     def send_announcement(self):
         # Yeni anons oluştur ve görev yöneticisine bildir
         announcement_text = self.textEdit_announcementtext.toPlainText()
+        if not announcement_text:
+            QMessageBox.warning(self, "Warning", "Announcement text cannot be empty.")
+            return        
+        
         last_date = self.dateEdit_lastdateofannouncement.date().toString("yyyy-MM-dd")
         self.task_manager.create_announcement(announcement_text, last_date)
         QMessageBox.information(self, "Success", "Announcement created successfully!")
@@ -485,10 +513,9 @@ class MyMainWindow(QMainWindow):
 if __name__ == "__main__":
     app = QApplication([])
     window = MyMainWindow()
+    Main= main.Main_Window()
+    main_chat= main.Chatboard()
    # window.set( 900, 600 )
     window.show()
     app.exec_()
 
-
-# TaskId leri bir kere listele.
-#900-600

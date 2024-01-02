@@ -94,10 +94,10 @@ class Login(QMainWindow):
 
                         elif accounts[email]["Account_Type"] == "Teacher":
                             stackedWidget.setCurrentIndex(4)
-                            teacher.label_Name.setText(accounts[login.email_LE.text()]["name"]+" "+accounts[login.email_LE.text()]["surname"])
+                            teacher.label_Name.setText("Welcome "+accounts[login.email_LE.text()]["name"]+" "+accounts[login.email_LE.text()]["surname"])
                         elif accounts[email]["Account_Type"] == "Admin":
                             stackedWidget.setCurrentIndex(5)
-                            teacher.label_Name.setText(accounts[login.email_LE.text()]["name"]+" "+accounts[login.email_LE.text()]["surname"])
+                            teacher.label_Name.setText("Welcome "+accounts[login.email_LE.text()]["name"]+" "+accounts[login.email_LE.text()]["surname"])
                             admin.fill_table()
 
                     else:
@@ -403,7 +403,6 @@ class Teacher(QMainWindow):
     def __init__(self):
         super(Teacher, self).__init__()
         loadUi('teacher_page.ui', self)
-        self.Back_Log_but.clicked.connect(self.switch_loginform)
         self.Chatboard_but.clicked.connect(self.switch_chatboard)
         
     def switch_loginform(self):
@@ -852,7 +851,6 @@ class Main_Window(QMainWindow):
         # loadUi(r'C:\Users\Gebruiker\Desktop\Python\PYQT5\calendar\student - Kopya (2).ui', self)  # UI dosyasını yükle
         self.pushButton.clicked.connect(self.switch_chatboard)
         self.pushButton_2.clicked.connect(self.switch_userprofile)
-
         self.setFixedSize(900,600)
         self.setWindowTitle('Campus Pulse')
         

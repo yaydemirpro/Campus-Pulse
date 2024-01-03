@@ -142,7 +142,7 @@
       {
         "id": 2,
         "task": "Write a Python program that solves a real-world problem",
-        "status": false,
+        "status": true,
         "deadline": "2025-02-28"
       },
       {

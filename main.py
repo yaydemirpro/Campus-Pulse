@@ -7,6 +7,8 @@ import json
 import re
 from datetime import datetime
 from PyQt5.QtGui import QColor
+from PyQt5.QtWidgets import QMessageBox
+
 
 
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
@@ -52,6 +54,7 @@ class Login(QMainWindow):
         """
         stackedWidget.setCurrentIndex(2)
         cont_admin.clear_line_edits_contactadmin()
+    
     
     def switch_student(self):
         """
@@ -111,7 +114,7 @@ class Login(QMainWindow):
         except json.JSONDecodeError:
             self.show_error_message("Error decoding JSON. Please check the file format.")
         except Exception as e:
-            self.show_error_message(f"An unexpected error occurred: {str(e)}")
+            self.show_error_message(f"No records found: {str(e)}")
 
     def show_error_message(self, message): #error messages
         error_box = QMessageBox()
@@ -853,6 +856,7 @@ class Main_Window(QMainWindow):
         # loadUi(r'C:\Users\Gebruiker\Desktop\Python\PYQT5\calendar\student - Kopya (2).ui', self)  # UI dosyasını yükle
         self.pushButton.clicked.connect(self.switch_chatboard)
         self.pushButton_2.clicked.connect(self.switch_userprofile)
+        self.back_button.clicked.connect(self.switch_login)
         self.setFixedSize(900,600)
         self.setWindowTitle('Campus Pulse')
 

@@ -1,7 +1,7 @@
 import sys
 import os
-from PyQt5.QtWidgets import QApplication, QMainWindow, QStackedWidget, QMessageBox, QWidget, QTableWidget, QTableWidgetItem, QCheckBox, QLabel, QCalendarWidget, QPushButton, QTreeWidget, QTreeWidgetItem, QVBoxLayout
-from PyQt5.QtCore import Qt, QTimer, QDate
+from PyQt5.QtWidgets import QApplication, QMainWindow, QDateTimeEdit, QStackedWidget, QMessageBox, QWidget, QTableWidget, QTableWidgetItem, QCheckBox, QLabel, QCalendarWidget, QPushButton, QTreeWidget, QTreeWidgetItem, QVBoxLayout
+from PyQt5.QtCore import Qt, QTimer, QDate, QDateTime
 from PyQt5.uic import loadUi
 import json
 import re
@@ -93,8 +93,10 @@ class Login(QMainWindow):
 
                         elif accounts[email]["Account_Type"] == "Teacher":
                             stackedWidget.setCurrentIndex(4)
+                            teacher.pushButton_switchadmin.hide()
                             teacher.label_Name.setText("Welcome "+accounts[login.email_LE.text()]["name"]+" "+accounts[login.email_LE.text()]["surname"])
                         elif accounts[email]["Account_Type"] == "Admin":
+                            teacher.pushButton_switchadmin.show()
                             stackedWidget.setCurrentIndex(5)
                             teacher.label_Name.setText("Welcome "+accounts[login.email_LE.text()]["name"]+" "+accounts[login.email_LE.text()]["surname"])
                             admin.fill_table()
@@ -403,6 +405,7 @@ class Teacher(QMainWindow):
         super(Teacher, self).__init__()
         loadUi('teacher_page.ui', self)
         self.Chatboard_but.clicked.connect(self.switch_chatboard)
+
         
     def switch_loginform(self):
         stackedWidget.setCurrentIndex(0)
@@ -852,7 +855,7 @@ class Main_Window(QMainWindow):
         self.pushButton_2.clicked.connect(self.switch_userprofile)
         self.setFixedSize(900,600)
         self.setWindowTitle('Campus Pulse')
-        
+
 
         self.note_edit = self.findChild(QLabel, 'note_edit')  # UI dosyasındaki note_edit adlı öğeyi bul
         self.calendar = self.findChild(QCalendarWidget, 'calendarWidget')  # UI dosyasındaki calendarWidget adlı öğeyi bul
@@ -869,7 +872,6 @@ class Main_Window(QMainWindow):
         self.comboBox_2.currentIndexChanged.connect(self.populate_table)
         self.comboBox_3.currentIndexChanged.connect(self.populate_table)
         # self.check()
-
         
 
 #load file
@@ -1070,6 +1072,7 @@ class Main_Window(QMainWindow):
 
     def update_announcements(self):
         # Anonsları güncelle
+        self.announcement_textedit.setToolTip("\n".join(str(announcement.get("content", "")) for announcement in self.announcements))
         if self.announcement_index < len(self.announcements):
             announcement = self.announcements[self.announcement_index]
             last_date = announcement.get("last_date")
@@ -1101,8 +1104,6 @@ class MyMainWindow(QMainWindow):
         #self.setupUi(self)
         loadUi("teacher_page.ui", self)
         self.setWindowTitle('Campus Pulse')
-        
-
         self.task_manager = TaskManager()
         self.populate_students_list()
         self.populate_todo_list()
@@ -1110,7 +1111,7 @@ class MyMainWindow(QMainWindow):
         self.populate_attendance_table()
         self.populate_mentor_attendance_table()
         self.connect_table_signals() 
-        self.check_user_account_type()
+        
     
         self.pushButton_chatbox.clicked.connect(student.switch_chatboard)
         self.pushButton_profile.clicked.connect(student.switch_userprofile)
@@ -1144,6 +1145,8 @@ class MyMainWindow(QMainWindow):
         self.timer.timeout.connect(self.update_announcements)
         self.timer.start(5000)  # 5 saniyede bir kontrol et
         self.update_announcements()  # Başlangıçta da çalıştır
+        self.textEdit_AnnouncementView.setToolTip("\n".join(str(announcement.get("content", "")) for announcement in self.announcements))
+
 
     def switch_to_chatboard(self):
         stackedWidget.setCurrentIndex(6)
@@ -1157,23 +1160,18 @@ class MyMainWindow(QMainWindow):
             else:
                 pass
 
-    def check_user_account_type(self):
-        # Kullanıcının account type'ını kontrol edin
-        account_type = "admin"  # Burada kullanıcının gerçek account type'ını almalısınız
-        if account_type == "admin":
-            self.pushButton_switchadmin.show()
-        else:
-            self.pushButton_switchadmin.hide()
+
             
     def populate_attendance_table(self):
         # Get students and dates from your data
         students = self.task_manager.get_students()
         dates = self.get_distinct_dates_from_attendance()
         # print("Tarihler:", dates)
-
+        
         # Set the row and column counts
         self.tableWidget_cattendencetable.setRowCount(len(students) + 1)  # +1 for the header row
         self.tableWidget_cattendencetable.setColumnCount(len(dates) + 3)  # +1 for the student names column
+        self.tableWidget_cattendencetable.horizontalHeader().setVisible(True)
 
         # Set the headers
         headers = ["Name","Surname","Email"] + dates
@@ -1208,6 +1206,7 @@ class MyMainWindow(QMainWindow):
             # Set the row and column counts
             self.tableWidget_mattendencetable.setRowCount(len(students))
             self.tableWidget_mattendencetable.setColumnCount(len(dates) + 3)  # +3 for Name, Surname, Email columns
+            self.tableWidget_mattendencetable.horizontalHeader().setVisible(True)
 
             # Set the headers
             headers = ["Name", "Surname", "Email"] + dates
@@ -1238,8 +1237,8 @@ class MyMainWindow(QMainWindow):
         for student_attendance in self.task_manager.attendance_data.values():
             for course_dates in student_attendance.values():
                 all_dates.extend(course_dates.keys())
-        # print(all_dates)
-        return list(set(all_dates))
+        sorted_dates = sorted(set(all_dates))
+        return sorted_dates
 
     def get_attendance_status(self, email, date, meeting_type):
             # Get attendance status for the given email, date, and meeting type
@@ -1292,8 +1291,11 @@ class MyMainWindow(QMainWindow):
         # Yeni görev oluştur
         task_text = self.plainTextEdit_NewTask.toPlainText()
 
-        deadline = self.dateTimeEdit_Deadline.date().toString("yyyy-MM-dd")
-
+        deadlinecontrol = self.dateTimeEdit_Deadline.date()
+        if  deadlinecontrol < QDate.currentDate():
+            QMessageBox.warning(self, "Warning", "Selected date can not be before the current date.")
+            return  
+        deadline = deadlinecontrol.toString("yyyy-MM-dd")
         # Seçilen öğrenci e-postalarını al
         selected_items = self.listWidget_AssignList.selectedItems()
         if not selected_items:
@@ -1319,7 +1321,12 @@ class MyMainWindow(QMainWindow):
             QMessageBox.warning(self, "Warning", "Announcement text cannot be empty.")
             return        
         
-        last_date = self.dateEdit_lastdateofannouncement.date().toString("yyyy-MM-dd")
+        last_date_control = self.dateEdit_lastdateofannouncement.date()
+        if  last_date_control < QDate.currentDate():
+            QMessageBox.warning(self, "Warning", "Selected date can not be before the current date.")
+            return  
+        last_date = last_date_control.toString("yyyy-MM-dd")   
+        
         self.task_manager.create_announcement(announcement_text, last_date)
         QMessageBox.information(self, "Success", "Announcement created successfully!")
 
@@ -1372,8 +1379,18 @@ class MyMainWindow(QMainWindow):
             QMessageBox.warning(self, "Warning", "Please select at least one student.")
             return
 
-        selected_date = self.dateTimeEdit_sch.date().toString("yyyy-MM-dd")
-        selected_course = self.listWidget_coursemeet.currentItem().text()
+        selected_date1 = self.dateTimeEdit_sch.date()
+        if  selected_date1 < QDate.currentDate():
+            QMessageBox.warning(self, "Warning", "Selected date can not be before the current date.")
+            return        
+        selected_date=selected_date1.toString("yyyy-MM-dd")
+        
+        selected_item = self.listWidget_coursemeet.currentItem()
+        if not selected_item or not selected_item.text():
+            QMessageBox.warning(self, "Warning", "Please select at least one Schedule Type.")
+            return
+
+        selected_course = selected_item.text()
 
         for item in selected_items:
             student_info = item.text().split("(")

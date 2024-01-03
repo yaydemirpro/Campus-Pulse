@@ -143,6 +143,9 @@
     <property name="toolTip">
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Profile&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
+    <property name="toolTipDuration">
+     <number>1</number>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(0, 85, 127);</string>
     </property>
@@ -174,9 +177,18 @@
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="toolTip">
+       <string>Best School Application Winner in 2024</string>
+      </property>
+      <property name="toolTipDuration">
+       <number>0</number>
+      </property>
       <property name="styleSheet">
        <string notr="true">border-radius:10px;
 color: rgb(228, 192, 180);</string>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
       <property name="html">
        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -200,6 +212,9 @@ p, li { white-space: pre-wrap; }
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
+      </property>
+      <property name="toolTipDuration">
+       <number>0</number>
       </property>
       <property name="styleSheet">
        <string notr="true">border-radius:10px;
@@ -232,6 +247,9 @@ p, li { white-space: pre-wrap; }
         <pointsize>10</pointsize>
        </font>
       </property>
+      <property name="toolTip">
+       <string>Exit to Login Page</string>
+      </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(228, 192, 180);</string>
       </property>
@@ -254,6 +272,9 @@ Login</string>
         <pointsize>28</pointsize>
        </font>
       </property>
+      <property name="toolTip">
+       <string>Profile</string>
+      </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(228, 192, 180);</string>
       </property>
@@ -265,6 +286,9 @@ Login</string>
         <width>25</width>
         <height>25</height>
        </size>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton_announcement">
@@ -282,7 +306,7 @@ Login</string>
        </font>
       </property>
       <property name="toolTip">
-       <string/>
+       <string>Publish Announcement</string>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(228, 192, 180);</string>
@@ -313,6 +337,9 @@ Login</string>
         <bold>true</bold>
        </font>
       </property>
+      <property name="toolTip">
+       <string>Chatbox</string>
+      </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(228, 192, 180);</string>
       </property>
@@ -335,8 +362,11 @@ Login</string>
         <height>231</height>
        </rect>
       </property>
+      <property name="toolTipDuration">
+       <number>0</number>
+      </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -348,8 +378,11 @@ Login</string>
           <x>0</x>
           <y>0</y>
           <width>851</width>
-          <height>191</height>
+          <height>211</height>
          </rect>
+        </property>
+        <property name="toolTipDuration">
+         <number>0</number>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(228, 192, 180);</string>
@@ -361,7 +394,13 @@ Login</string>
          <number>4</number>
         </property>
         <attribute name="horizontalHeaderVisible">
-         <bool>false</bool>
+         <bool>true</bool>
+        </attribute>
+        <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="horizontalHeaderStretchLastSection">
+         <bool>true</bool>
         </attribute>
         <row>
          <property name="text">
@@ -441,11 +480,14 @@ Login</string>
           <x>0</x>
           <y>0</y>
           <width>851</width>
-          <height>191</height>
+          <height>211</height>
          </rect>
         </property>
         <property name="tabletTracking">
          <bool>false</bool>
+        </property>
+        <property name="toolTipDuration">
+         <number>0</number>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(228, 192, 180);</string>
@@ -457,6 +499,15 @@ Login</string>
          <number>4</number>
         </property>
         <attribute name="horizontalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="horizontalHeaderStretchLastSection">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
          <bool>false</bool>
         </attribute>
         <row>
@@ -536,6 +587,9 @@ Login</string>
         <width>861</width>
         <height>191</height>
        </rect>
+      </property>
+      <property name="toolTipDuration">
+       <number>0</number>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(228, 192, 180);</string>
@@ -674,6 +728,9 @@ Login</string>
             </disabled>
            </palette>
           </property>
+          <property name="toolTipDuration">
+           <number>0</number>
+          </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(171, 171, 171);
 alternate-background-color: rgb(225, 198, 187);
@@ -719,6 +776,9 @@ border-radius:10px;</string>
           </attribute>
           <attribute name="horizontalHeaderDefaultSectionSize">
            <number>107</number>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
           </attribute>
           <row>
            <property name="text">
@@ -779,6 +839,15 @@ border-radius:10px;</string>
        <layout class="QVBoxLayout" name="verticalLayout_5">
         <item>
          <widget class="QTableWidget" name="tableWidget_Students">
+          <property name="toolTipDuration">
+           <number>0</number>
+          </property>
+          <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
           <column>
            <property name="text">
             <string>Name</string>
@@ -818,6 +887,9 @@ border-radius:10px;</string>
         <pointsize>28</pointsize>
        </font>
       </property>
+      <property name="toolTip">
+       <string>Meeting and Course Schedule</string>
+      </property>
       <property name="whatsThis">
        <string/>
       </property>
@@ -848,6 +920,9 @@ border-radius:10px;</string>
         <family>Calibri</family>
         <pointsize>10</pointsize>
        </font>
+      </property>
+      <property name="toolTip">
+       <string>Back to Admin Module</string>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(228, 192, 180);</string>
@@ -880,6 +955,12 @@ Admin</string>
         <pointsize>10</pointsize>
        </font>
       </property>
+      <property name="toolTip">
+       <string notr="true"/>
+      </property>
+      <property name="toolTipDuration">
+       <number>0</number>
+      </property>
       <property name="styleSheet">
        <string notr="true">color: rgb(234, 222, 224);</string>
       </property>
@@ -907,6 +988,12 @@ Admin</string>
         <family>Calibri</family>
        </font>
       </property>
+      <property name="toolTip">
+       <string/>
+      </property>
+      <property name="toolTipDuration">
+       <number>0</number>
+      </property>
       <property name="styleSheet">
        <string notr="true">border-radius:10px;
 background-color: rgb(234, 222, 224);
@@ -931,6 +1018,9 @@ p, li { white-space: pre-wrap; }
      <layout class="QVBoxLayout" name="verticalLayout_6">
       <item>
        <widget class="QGroupBox" name="groupBox_coursesch">
+        <property name="toolTipDuration">
+         <number>0</number>
+        </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(0, 85, 127);</string>
         </property>
@@ -954,6 +1044,9 @@ p, li { white-space: pre-wrap; }
            <bold>true</bold>
           </font>
          </property>
+         <property name="toolTipDuration">
+          <number>0</number>
+         </property>
          <property name="styleSheet">
           <string notr="true">background-color: rgb(170, 85, 127);
 border-color: rgb(0, 85, 127);
@@ -975,6 +1068,9 @@ border-radius:10px;</string>
             <height>121</height>
            </rect>
           </property>
+          <property name="toolTipDuration">
+           <number>0</number>
+          </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(228, 192, 180);</string>
           </property>
@@ -990,6 +1086,9 @@ border-radius:10px;</string>
             <width>171</width>
             <height>20</height>
            </rect>
+          </property>
+          <property name="toolTipDuration">
+           <number>0</number>
           </property>
           <property name="styleSheet">
            <string notr="true">color: rgb(0, 0, 0);</string>
@@ -1015,6 +1114,9 @@ border-radius:10px;</string>
             <bold>true</bold>
            </font>
           </property>
+          <property name="toolTipDuration">
+           <number>0</number>
+          </property>
           <property name="styleSheet">
            <string notr="true">border-radius:10px;
 border-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(0, 0, 0, 255), stop:0.19397 rgba(0, 0, 0, 255), stop:0.202312 rgba(122, 97, 0, 255), stop:0.495514 rgba(76, 58, 0, 255), stop:0.504819 rgba(255, 255, 255, 255), stop:0.79 rgba(255, 255, 255, 255), stop:1 rgba(255, 158, 158, 255));
@@ -1036,6 +1138,9 @@ ANNOUNCEMENT</string>
             <height>20</height>
            </rect>
           </property>
+          <property name="toolTipDuration">
+           <number>0</number>
+          </property>
           <property name="styleSheet">
            <string notr="true">color: rgb(0, 0, 0);</string>
           </property>
@@ -1051,6 +1156,9 @@ ANNOUNCEMENT</string>
             <width>171</width>
             <height>41</height>
            </rect>
+          </property>
+          <property name="toolTipDuration">
+           <number>0</number>
           </property>
           <property name="styleSheet">
            <string notr="true">border-radius:10px;
@@ -1101,6 +1209,9 @@ background-color: rgb(228, 192, 180);</string>
            <height>16</height>
           </rect>
          </property>
+         <property name="toolTipDuration">
+          <number>0</number>
+         </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -1113,6 +1224,9 @@ background-color: rgb(228, 192, 180);</string>
            <width>20</width>
            <height>541</height>
           </rect>
+         </property>
+         <property name="toolTipDuration">
+          <number>0</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1143,6 +1257,9 @@ background-color: rgb(228, 192, 180);</string>
            <weight>75</weight>
            <bold>true</bold>
           </font>
+         </property>
+         <property name="toolTipDuration">
+          <number>0</number>
          </property>
          <property name="autoFillBackground">
           <bool>false</bool>
@@ -1176,6 +1293,9 @@ background-color: rgb(170, 85, 127);
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="toolTipDuration">
+           <number>0</number>
           </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(228, 192, 180);</string>
@@ -1220,6 +1340,9 @@ background-color: rgb(170, 85, 127);
           <property name="toolTip">
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Create Task&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
+          <property name="toolTipDuration">
+           <number>0</number>
+          </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(228, 192, 180);
 border-radius:10px;
@@ -1250,6 +1373,9 @@ SAVE</string>
             <pointsize>10</pointsize>
            </font>
           </property>
+          <property name="toolTipDuration">
+           <number>0</number>
+          </property>
           <property name="text">
            <string>Assignees</string>
           </property>
@@ -1274,6 +1400,9 @@ SAVE</string>
             <pointsize>10</pointsize>
            </font>
           </property>
+          <property name="toolTipDuration">
+           <number>0</number>
+          </property>
           <property name="text">
            <string>Task </string>
           </property>
@@ -1297,6 +1426,9 @@ SAVE</string>
            <font>
             <pointsize>10</pointsize>
            </font>
+          </property>
+          <property name="toolTipDuration">
+           <number>0</number>
           </property>
           <property name="text">
            <string>Deadline</string>
@@ -1323,6 +1455,9 @@ SAVE</string>
             <pointsize>10</pointsize>
             <italic>false</italic>
            </font>
+          </property>
+          <property name="toolTipDuration">
+           <number>0</number>
           </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(228, 192, 180);
@@ -1355,6 +1490,9 @@ SAVE</string>
             <weight>50</weight>
             <bold>false</bold>
            </font>
+          </property>
+          <property name="toolTipDuration">
+           <number>0</number>
           </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(228, 192, 180);
@@ -1389,6 +1527,9 @@ selection-background-color: rgb(255, 0, 0);</string>
            <bold>true</bold>
           </font>
          </property>
+         <property name="toolTipDuration">
+          <number>0</number>
+         </property>
          <property name="styleSheet">
           <string notr="true">background-color: rgb(170, 85, 127);
 border-radius:10px;</string>
@@ -1408,6 +1549,9 @@ border-radius:10px;</string>
             <height>16</height>
            </rect>
           </property>
+          <property name="toolTipDuration">
+           <number>0</number>
+          </property>
           <property name="styleSheet">
            <string notr="true">color: rgb(0, 0, 0);</string>
           </property>
@@ -1423,6 +1567,9 @@ border-radius:10px;</string>
             <width>251</width>
             <height>141</height>
            </rect>
+          </property>
+          <property name="toolTipDuration">
+           <number>0</number>
           </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(228, 192, 180);</string>
@@ -1449,6 +1596,9 @@ border-radius:10px;</string>
             <underline>false</underline>
            </font>
           </property>
+          <property name="toolTipDuration">
+           <number>0</number>
+          </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(228, 192, 180);
 border-radius: 10px ;</string>
@@ -1467,6 +1617,9 @@ SAVE</string>
             <height>16</height>
            </rect>
           </property>
+          <property name="toolTipDuration">
+           <number>0</number>
+          </property>
           <property name="styleSheet">
            <string notr="true">color: rgb(0, 0, 0);</string>
           </property>
@@ -1482,6 +1635,9 @@ SAVE</string>
             <width>131</width>
             <height>61</height>
            </rect>
+          </property>
+          <property name="toolTipDuration">
+           <number>0</number>
           </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(228, 192, 180);</string>
@@ -1506,6 +1662,9 @@ SAVE</string>
             <height>16</height>
            </rect>
           </property>
+          <property name="toolTipDuration">
+           <number>0</number>
+          </property>
           <property name="styleSheet">
            <string notr="true">color: rgb(0, 0, 0);</string>
           </property>
@@ -1521,6 +1680,9 @@ SAVE</string>
             <width>131</width>
             <height>51</height>
            </rect>
+          </property>
+          <property name="toolTipDuration">
+           <number>0</number>
           </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(228, 192, 180);

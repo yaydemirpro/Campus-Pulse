@@ -1,10 +1,10 @@
 {
   "yusuf@gmail.com": {
     "name": "Yusuf",
-    "surname": "Administrator",
+    "surname": "Aydemir",
     "password": "12345",
     "Account_Type": "Admin",
-    "Email": "admin@gmail.com",
+    "Email": "yusuf@gmail.com",
     "Gender": "",
     "DoB": "",
     "Phone": "12345"
@@ -30,11 +30,51 @@
     "Phone": "+31456456456"
   },
   "murat@gmail.com": {
-    "name": "murat",
-    "surname": "....",
+    "name": "Murat",
+    "surname": "Mert",
     "password": "12345",
     "Account_Type": "Student",
     "Email": "murat@gmail.com",
+    "Gender": "",
+    "DoB": "",
+    "Phone": ""
+  },
+  "mehmet@gmail.com": {
+    "name": "Mehmet",
+    "surname": "Koc",
+    "password": "12345",
+    "Account_Type": "Teacher",
+    "Email": "mehmet@gmail.com",
+    "Gender": "",
+    "DoB": "",
+    "Phone": ""
+  }, 
+  "adem@gmail.com": {
+    "name": "Adem",
+    "surname": "Dogan",
+    "password": "12345",
+    "Account_Type": "Student",
+    "Email": "adem@gmail.com",
+    "Gender": "",
+    "DoB": "",
+    "Phone": ""
+  },
+  "alper@gmail.com": {
+    "name": "Alper",
+    "surname": "Kaan Kavili",
+    "password": "12345",
+    "Account_Type": "Teacher",
+    "Email": "alper@gmail.com",
+    "Gender": "",
+    "DoB": "",
+    "Phone": ""
+  },
+  "melike@gmail.com": {
+    "name": "Melike",
+    "surname": "Kaya",
+    "password": "12345",
+    "Account_Type": "Student",
+    "Email": "melike@gmail.com",
     "Gender": "",
     "DoB": "",
     "Phone": ""

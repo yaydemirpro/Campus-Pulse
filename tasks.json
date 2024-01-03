@@ -1,113 +1,177 @@
 {
-  "yusuf@gmail.com": {
+  "murat@gmail.com": {
     "tasks": [
       {
         "id": 1,
-        "task": "Ensure proper management of user accounts in the system",
-        "status": true,
-        "deadline": "2023-12-31"
+        "task": "Complete the Python Basics Assignment",
+        "status": false,
+        "deadline": "2024-05-15"
       },
       {
         "id": 2,
-        "task": "Conduct a review of the system's security measures",
+        "task": "Write a Python program that solves a real-world problem",
         "status": false,
-        "deadline": "2023-12-15"
-      }
-    ]
-  },
-  "hakan@gmail.com": {
-    "tasks": [
-      {
-        "id": 1,
-        "task": "Create a user-friendly admin dashboard for system management",
-        "status": false,
-        "deadline": "2023-12-20"
+        "deadline": "2024-05-30"
       },
       {
-        "id": 2,
-        "task": "Optimize database queries and improve overall performance",
-        "status": true,
-        "deadline": "2023-12-25"
-      },
-      {
-        "id": "4",
-        "task": "Week 7- Odevlerini Tamamlayin",
-        "status": true,
-        "deadline": "2000-05-03"
+        "id": 3,
+        "task": "Create a Python project showcasing your skills",
+        "status": false,
+        "deadline": "2024-06-15"
       }
     ]
   },
   "merve@gmail.com": {
     "tasks": [
       {
-        "id": 1,
-        "task": "Finish the first assignment for the semester",
+        "id": 4,
+        "task": "Read and summarize a Python-related research paper",
+        "status": false,
+        "deadline": "2024-07-01"
+      },
+      {
+        "id": 5,
+        "task": "Participate in a Python coding challenge",
         "status": true,
-        "deadline": "2023-12-10"
+        "deadline": "2024-07-15"
       },
       {
-        "id": 2,
-        "task": "Study and prepare for upcoming exams",
-        "status": true,
-        "deadline": "2023-12-22"
-      },
-      {
-        "id": "4",
-        "task": "Week 7- Odevlerini Tamamlayin",
+        "id": 6,
+        "task": "Contribute to an open-source Python project",
         "status": false,
-        "deadline": "2000-05-03"
-      },
-      {
-        "id": "5",
-        "task": "Deneme",
-        "status": false,
-        "deadline": "2024-01-17"
-      },
-      {
-        "id": "6",
-        "task": "Deneme2",
-        "status": false,
-        "deadline": "2024-01-24"
-      },
-      {
-        "id": "7",
-        "task": "Yeni g\u00f6rev",
-        "status": false,
-        "deadline": "2024-01-18"
+        "deadline": "2024-07-30"
       }
     ]
   },
-  "murat@gmail.com": {
+  "hakan@gmail.com": {
+    "tasks": [
+      {
+        "id": 7,
+        "task": "Create a Python script for automating a task",
+        "status": true,
+        "deadline": "2024-08-15"
+      },
+      {
+        "id": 8,
+        "task": "Prepare and deliver a short presentation on a Python topic",
+        "status": false,
+        "deadline": "2024-08-30"
+      },
+      {
+        "id": 9,
+        "task": "Collaborate with peers on a Python group project",
+        "status": false,
+        "deadline": "2024-09-15"
+      }
+    ]
+  },
+  "serkan@gmail.com": {
     "tasks": [
       {
         "id": 1,
-        "task": "Finish the first assignment for the semester",
-        "status": false,
-        "deadline": "2023-12-10"
+        "task": "Complete the Python Basics Assignment",
+        "status": true,
+        "deadline": "2024-09-30"
       },
       {
         "id": 2,
-        "task": "Study and prepare for upcoming exams",
-        "status": false,
-        "deadline": "2023-12-22"
+        "task": "Write a Python program that solves a real-world problem",
+        "status": true,
+        "deadline": "2024-10-15"
       },
       {
-        "id": "4",
-        "task": "Week 7- Odevlerini Tamamlayin",
+        "id": 3,
+        "task": "Create a Python project showcasing your skills",
+        "status": true,
+        "deadline": "2024-10-30"
+      }
+    ]
+  },
+  "yusuf@gmail.com": {
+    "tasks": [
+      {
+        "id": 4,
+        "task": "Read and summarize a Python-related research paper",
         "status": false,
-        "deadline": "2000-05-03"
+        "deadline": "2024-11-15"
       },
       {
-        "id": "6",
-        "task": "Deneme2",
+        "id": 5,
+        "task": "Participate in a Python coding challenge",
         "status": false,
-        "deadline": "2024-01-24"
+        "deadline": "2024-11-30"
       },
       {
-        "id": "8",
-        "task": "New Task",
+        "id": 6,
+        "task": "Contribute to an open-source Python project",
+        "status": true,
+        "deadline": "2024-12-15"
+      }
+    ]
+  },
+  "mehmet@gmail.com": {
+    "tasks": [
+      {
+        "id": 7,
+        "task": "Create a Python script for automating a task",
         "status": false,
-        "deadline": "2024-01-10"
+        "deadline": "2024-12-30"
+      },
+      {
+        "id": 8,
+        "task": "Prepare and deliver a short presentation on a Python topic",
+        "status": false,
+        "deadline": "2025-01-15"
+      },
+      {
+        "id": 9,
+        "task": "Collaborate with peers on a Python group project",
+        "status": false,
+        "deadline": "2025-01-30"
+      }
+    ]
+  },
+  "adem@gmail.com": {
+    "tasks": [
+      {
+        "id": 1,
+        "task": "Complete the Python Basics Assignment",
+        "status": true,
+        "deadline": "2025-02-15"
+      },
+      {
+        "id": 2,
+        "task": "Write a Python program that solves a real-world problem",
+        "status": false,
+        "deadline": "2025-02-28"
+      },
+      {
+        "id": 3,
+        "task": "Create a Python project showcasing your skills",
+        "status": false,
+        "deadline": "2025-03-15"
+      }
+    ]
+  },
+  "alper@gmail.com": {
+    "tasks": [
+      {
+        "id": 4,
+        "task": "Read and summarize a Python-related research paper",
+        "status": false,
+        "deadline": "2025-03-30"
+      },
+      {
+        "id": 5,
+        "task": "Participate in a Python coding challenge",
+        "status": false,
+        "deadline": "2025-04-15"
+      },
+      {
+        "id": 6,
+        "task": "Contribute to an open-source Python project",
+        "status": true,
+        "deadline": "2025-04-30"
       }
     ]
   }

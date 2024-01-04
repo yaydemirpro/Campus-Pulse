@@ -1,14 +1,1 @@
-{
-  "eeadmin1@gmail.com": {
-    "password": "Admin123",
-    "Account_Type": "Teacher",
-    "name": "Admin",
-    "surname": "Administrator"
-  },
-  "eemervebakisgan@gmail.com": {
-    "password": "12345",
-    "Account_Type": "Teacher",
-    "name": "Merve",
-    "surname": "Bakisgan"
-  }
-}
+{}

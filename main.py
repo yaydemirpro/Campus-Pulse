@@ -79,9 +79,6 @@ class Login(QMainWindow):
                 student.label_2.setText("Welcome, "+accounts[email]["name"])
                 student.label.setText(accounts[email]["name"]+" "+accounts[email]["surname"])
 
-
-
-
                 if email in accounts:
                     if accounts[email]["password"] == password:
                         if accounts[email]["Account_Type"] == "Student":
@@ -95,6 +92,13 @@ class Login(QMainWindow):
                             student.show_announcements()
 
                         elif accounts[email]["Account_Type"] == "Teacher":
+                            teacher.task_manager.load_data()
+                            teacher.populate_students_list()
+                            teacher.populate_todo_list()
+                            teacher.populate_students_table()
+                            teacher.populate_attendance_table()
+                            teacher.populate_mentor_attendance_table()
+                            teacher.connect_table_signals() 
                             stackedWidget.setCurrentIndex(4)
                             teacher.pushButton_switchadmin.hide()
                             teacher.label_Name.setText("Welcome "+accounts[login.email_LE.text()]["name"]+" "+accounts[login.email_LE.text()]["surname"])
@@ -392,17 +396,6 @@ class ContactAdmin(QMainWindow):
         self.TA_surname_LE.clear()
 
 
-
-# class Student(QMainWindow):
-#     def __init__(self):
-#         super(Student, self).__init__()
-#         loadUi('student.ui', self)
-#         # self.Back_Log_but.clicked.connect(self.switch_loginform)
-
-
-#     def switch_loginform(self):
-#         stackedWidget.setCurrentIndex(0)
-
 class Teacher(QMainWindow):
     def __init__(self):
         super(Teacher, self).__init__()
@@ -686,9 +679,6 @@ class Chatboard(QMainWindow):
             self.usertableWidget.setItem(row, 1, QTableWidgetItem(email))
             row += 1
 
-
-
-
     def selection(self):
         """
         Handles user selection from the user table and displays the chat history.
@@ -779,8 +769,6 @@ class Chatboard(QMainWindow):
 
         count=0
         self.fill_user_list2()
-
-
     
     def send_message(self):
         """
@@ -865,17 +853,10 @@ class Main_Window(QMainWindow):
         self.calendar = self.findChild(QCalendarWidget, 'calendarWidget')  # UI dosyasındaki calendarWidget adlı öğeyi bul
         self.mission_complete = self.findChild(QPushButton, 'self.mission_complete') 
 
-        # self.load_attendance()
-        # self.load_tasks()
-        # self.load_announcements()
-        # self.load_calendar_events()
-        # self.show_tasks()
-        # self.populate_table()
-        # self.show_announcements()
+
         self.calendar.clicked.connect(self.load_calendar_events)
         self.comboBox_2.currentIndexChanged.connect(self.populate_table)
         self.comboBox_3.currentIndexChanged.connect(self.populate_table)
-        # self.check()
         
 
 #load file
@@ -1109,12 +1090,12 @@ class MyMainWindow(QMainWindow):
         loadUi("teacher_page.ui", self)
         self.setWindowTitle('Campus Pulse')
         self.task_manager = TaskManager()
-        self.populate_students_list()
-        self.populate_todo_list()
-        self.populate_students_table()
-        self.populate_attendance_table()
-        self.populate_mentor_attendance_table()
-        self.connect_table_signals() 
+        # self.populate_students_list()
+        # self.populate_todo_list()
+        # self.populate_students_table()
+        # self.populate_attendance_table()
+        # self.populate_mentor_attendance_table()
+        # self.connect_table_signals() 
         
     
         self.pushButton_chatbox.clicked.connect(student.switch_chatboard)
@@ -1448,10 +1429,6 @@ class MyMainWindow(QMainWindow):
 
             if email_c and date_c and status_c:
                 self.task_manager.update_attendance_data(email_c, "Data Science", date_c, status_c)
-
-
-
-
 
     def get_date_from_table(self, table_widget, col):
         # Get the date from the respective table

@@ -230,12 +230,12 @@ border-radius: 15px; </string>
        </item>
        <item>
         <property name="text">
-         <string>Attend</string>
+         <string>Attended</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Not Attend</string>
+         <string>Not Attended</string>
         </property>
        </item>
       </widget>

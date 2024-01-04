@@ -48,7 +48,7 @@
     "Gender": "",
     "DoB": "",
     "Phone": ""
-  }, 
+  },
   "adem@gmail.com": {
     "name": "Adem",
     "surname": "Dogan",
@@ -75,6 +75,16 @@
     "password": "12345",
     "Account_Type": "Student",
     "Email": "melike@gmail.com",
+    "Gender": "",
+    "DoB": "",
+    "Phone": ""
+  },
+  "ali.cihan@gmail.com": {
+    "password": "ABab12**",
+    "Account_Type": "Student",
+    "name": "Ali",
+    "surname": "Cihan",
+    "Email": "ali.cihan@gmail.com",
     "Gender": "",
     "DoB": "",
     "Phone": ""

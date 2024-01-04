@@ -98,5 +98,15 @@
     "Gender": "",
     "DoB": "",
     "Phone": ""
+  },
+  "ogrencizafer@gmail.com": {
+    "password": "AbCn12**",
+    "Account_Type": "Student",
+    "name": "Zafer",
+    "surname": "Ogrenci",
+    "Email": "ogrencizafer@gmail.com",
+    "Gender": "",
+    "DoB": "",
+    "Phone": ""
   }
 }

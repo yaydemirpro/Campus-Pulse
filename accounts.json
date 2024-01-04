@@ -88,5 +88,15 @@
     "Gender": "",
     "DoB": "",
     "Phone": ""
+  },
+  "ogrenciyilmaz@gmail.com": {
+    "password": "AbCn12**",
+    "Account_Type": "Student",
+    "name": "Yilmaz",
+    "surname": "Ogrenci",
+    "Email": "ogrenciyilmaz@gmail.com",
+    "Gender": "",
+    "DoB": "",
+    "Phone": ""
   }
 }

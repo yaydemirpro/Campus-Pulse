@@ -102,7 +102,14 @@ class Login(QMainWindow):
                             stackedWidget.setCurrentIndex(4)
                             teacher.pushButton_switchadmin.hide()
                             teacher.label_Name.setText("Welcome "+accounts[login.email_LE.text()]["name"]+" "+accounts[login.email_LE.text()]["surname"])
+                        
                         elif accounts[email]["Account_Type"] == "Admin":
+                            teacher.task_manager.load_data()
+                            teacher.populate_students_list()
+                            teacher.populate_todo_list()
+                            teacher.populate_students_table()
+                            teacher.populate_attendance_table()
+                            teacher.populate_mentor_attendance_table()
                             teacher.pushButton_switchadmin.show()
                             stackedWidget.setCurrentIndex(5)
                             teacher.label_Name.setText("Welcome "+accounts[login.email_LE.text()]["name"]+" "+accounts[login.email_LE.text()]["surname"])

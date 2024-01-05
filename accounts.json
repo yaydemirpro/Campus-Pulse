@@ -25,7 +25,7 @@
     "password": "12345",
     "Account_Type": "Student",
     "Email": "merve@gmail.com",
-    "Gender": "",
+    "Gender": "Female",
     "DoB": "",
     "Phone": "+31456456456"
   },
@@ -45,9 +45,9 @@
     "password": "12345",
     "Account_Type": "Teacher",
     "Email": "mehmet@gmail.com",
-    "Gender": "",
+    "Gender": "Male",
     "DoB": "",
-    "Phone": ""
+    "Phone": "12345"
   },
   "adem@gmail.com": {
     "name": "Adem",
@@ -108,5 +108,21 @@
     "Gender": "",
     "DoB": "",
     "Phone": ""
+  },
+  "ogrencialper@gmail.com": {
+    "password": "AbCn12***",
+    "Account_Type": "Student",
+    "name": "Alper",
+    "surname": "Ogrenci",
+    "Email": "ogrencialper@gmail.com",
+    "Gender": "",
+    "DoB": "",
+    "Phone": ""
+  },
+  "teacheraccount@gmail.com": {
+    "password": "AbCn12**",
+    "Account_Type": "Teacher",
+    "name": "Teacher",
+    "surname": "Account"
   }
 }

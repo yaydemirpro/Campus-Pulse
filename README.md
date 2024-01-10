@@ -9,24 +9,30 @@
 **Second Step (Impl.)**
 
     < Class:
+
        ○ Multiple classes can be used in the project >
 
     < Error Controls (try/except):
+
        ○ If user enter a not supposed value, then program should still be able to run >
 
     < Database: 
+
        ○ No need for database, just use “file I/O” in the directory of “./users/”
        ○ Hold user information in a .txt, .csv or .json file >
 
     ‘Student Sign Up Page’
+
        ○ Sign up with email and password
        ○ Email address must be unique
 
     ‘Login Page’
+
        ○ Login with email and password
        ○ Password will be indicated as asterisks
 
     ‘Admin Page’
+
        ○ When the admin login, admin will reach the admin page
        ○ Admin can run all the functions (opt.)
        ○ Admin will create a teacher account with the given email addresses >
@@ -44,6 +50,7 @@
        ○ A student can view and react only his/her To Do List screen 
 
     Teacher Page
+
        ○ When the teachers login, they will reach the Teacher Page
        ○ Every teacher has a profile page contains their own information
        ○ Teachers can create, edit and view the annual course schedule 
@@ -55,6 +62,7 @@
        ○ Creating tasks on the To Do List screen >
  
     Program/Output
+
        ○ In the end, there should be a program that a user can run the program on Windows 
        ○ Test the program and try to find bugs
        ○ At least get feedback from 3 people
@@ -62,6 +70,7 @@
        ○ Please follow the following video in order to make a program working on your computer like a normal program without python
 
     Presentation
+ 
        ○ To complete the project, all the members have to show up in the presentation and present the program 
        ○ No code explanation 
        ○ Introduction and Project Overview

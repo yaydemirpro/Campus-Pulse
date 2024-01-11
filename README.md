@@ -69,7 +69,7 @@
        ○ Try to adjust your program based on your test results and feedback Get “.EXE” file and share it with your friends:
        ○ Please follow the following video in order to make a program working on your computer like a normal program without python
 
-    Third Step (Testing and Presentation)
+**Third Step (Testing and Presentation)**
  
        ○ To complete the project, all the members have to show up in the presentation and present the program 
        ○ No code explanation 

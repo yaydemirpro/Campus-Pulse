@@ -10,7 +10,6 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -609,6 +608,7 @@ class Ui_MainWindow(object):
         self.tabWidget_attendence.setCurrentIndex(1)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -750,3 +750,4 @@ class Ui_MainWindow(object):
         self.listWidget_coursemeet.setSortingEnabled(__sortingEnabled)
         self.label_10.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:10pt;\">Date and Time</span></p></body></html>"))
         self.MainPage.setTabText(self.MainPage.indexOf(self.tabWidgetsPageSchedule), _translate("MainWindow", "Schedule"))
+
